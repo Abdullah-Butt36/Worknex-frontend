@@ -1,7 +1,25 @@
-Project Title: WORKNEX - Professional Services Platform.
+# Worknex-frontend 🚀
 
-Status: "16/26 Pages Completed (Core UI & Responsiveness done)."
+A modern, professional services marketplace built with **React** and **Tailwind CSS**.
 
-Tech Stack: React, Tailwind CSS, Lucide React.
+## 📊 Current Status
+- **Total Pages Planned:** 26
+- **Completed Pages:** 16 (Fully Responsive)
+- **Routing:** Pending (UI/UX Core Ready)
 
-How to Run: npm install and npm run dev
+## 🛠️ Tech Stack
+- **Library:** React.js
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide-react
+- **Fonts:** Inter / Montserrat
+
+## 📁 Folder Structure
+This project follows a component-based architecture:
+- `IdentityVerification/` - Identity & security modules.
+- `LegalDocument/` - Tax and legal submission pages.
+- `Sidebar/` - Responsive navigation systems.
+
+## 🚀 Getting Started
+1. Clone the repo: `git clone https://github.com/Username/Worknex-frontend.git`
+2. Install dependencies: `npm install`
+3. Start dev server: `npm run dev`
