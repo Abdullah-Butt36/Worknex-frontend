@@ -1,5 +1,13 @@
 import React from "react";
-
+// import ProposalHistoryPage from "./Components/ProposalHistory/ProposalHistoryPage";
+// import ProposalViewPage from "./Components/ProposalSoftGate/ProposalViewPage";
+// import ProposalPage from "./Components/SubmitProposal/ProposalPage";
+// import DashboardLayout from "./Components/PersonalSocument/DashboardLayout";
+// import ProposalLayout from "./Components/ProposalView/ProposalLayout";
+// import OpportunityLayout from "./Components/OpportunityFeed/OpportunityLayout";
+// import MainLayout from "./Components/ProjectPlan/MainLayout";
+// import MessageCenterPage from "./Components/MessageCenter/MessageCenterPage";
+// import SubscriptionPage from "./Components/SubscriptionPlan/SubscriptionPage";
 // import VerificationLayout from "./Components/IdentityVerification/VerificationLayout";
 // import ContractAcceptance from "./Components/ContractAcceptance/ContractAcceptance";
 // import LegalParent from "./Components/LegalDocument/LegalParent";
@@ -20,7 +28,16 @@ import React from "react";
 const App = () => {
   return (
     <div>
+      {/* <MessageCenterPage /> */}
+      {/* <ProposalHistoryPage /> */}
+      {/* <ProposalViewPage /> */}
+      {/* <ProposalPage /> */}
+      {/* <MainLayout /> */}
+      {/* <ProposalLayout /> */}
+      {/* <ProposalForm /> */}
+      {/* <OpportunityLayout /> */}
       {/* <VerificationLayout /> */}
+      {/* <DashboardLayout /> */}
       {/* <LandingPage /> */}
       {/* <TermsAndConditions /> */}
       {/* <OpportunitiesLayout /> */}
@@ -36,6 +53,8 @@ const App = () => {
       {/* <DashboardParent /> */}
       {/* <LegalParent /> */}
       {/* <ContractAcceptance /> */}
+      {/* <SubscriptionPage /> */}
+     
     </div>
   );
 };
