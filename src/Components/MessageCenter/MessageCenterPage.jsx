@@ -1,23 +1,44 @@
-import React, { useState } from 'react';
-import NavbarMessages from './NavbarMessages';
-import MessageSidebar from './MessageSidebar';
-import ChatWindow from './ChatWindow';
+import React, { useState } from "react";
+import NavbarMessages from "./NavbarMessages";
+import MessageSidebar from "./MessageSidebar";
+import ChatWindow from "./ChatWindow";
 
 const MessageCenterPage = () => {
   // Chat data array
   const conversations = [
-    { id: 1, title: 'Desarrollo Web E-commerce', client: 'Carlos M.', status: 'Conversación activa', msg: 'Hola, adjunto los archivos...', time: '10:42 AM' },
-    { id: 2, title: 'Diseño de Logo Corporativo', client: 'Lucía G.', status: 'Pendiente', msg: '¿Podemos agendar una call?', time: '09:15 AM' },
-    { id: 3, title: 'Consultoría SEO - Organic', client: 'Marcos R.', status: 'En pausa', msg: 'Excelente, quedamos a la espera...', time: 'Ayer' },
+    {
+      id: 1,
+      title: "Desarrollo Web E-commerce",
+      client: "Carlos M.",
+      status: "Conversación activa",
+      msg: "Hola, adjunto los archivos...",
+      time: "10:42 AM",
+    },
+    {
+      id: 2,
+      title: "Diseño de Logo Corporativo",
+      client: "Lucía G.",
+      status: "Pendiente",
+      msg: "¿Podemos agendar una call?",
+      time: "09:15 AM",
+    },
+    {
+      id: 3,
+      title: "Consultoría SEO - Organic",
+      client: "Marcos R.",
+      status: "En pausa",
+      msg: "Excelente, quedamos a la espera...",
+      time: "Ayer",
+    },
   ];
 
   // Selection states
-  const [selectedChat, setSelectedChat] = useState(conversations[0]); 
+  const [selectedChat, setSelectedChat] = useState(conversations[0]);
   const [showChatMobile, setShowChatMobile] = useState(false);
 
   const handleChatSelect = (chat) => {
     setSelectedChat(chat);
-    setShowChatMobile(true); // Mobile par view switch karne ke liye
+    setShowChatMobile(true);
   };
 
   return (
@@ -25,20 +46,22 @@ const MessageCenterPage = () => {
       <NavbarMessages />
 
       <div className="flex flex-1 overflow-hidden relative">
-        {/* Sidebar ko conversations list aur selection function pass kiya */}
-        <aside className={`${showChatMobile ? 'hidden md:flex' : 'flex'} w-full md:w-[350px] lg:w-[400px] border-r border-gray-800/50 bg-[#0B1221]/20`}>
-          <MessageSidebar 
-            conversations={conversations} 
-            activeId={selectedChat.id} 
-            onSelectChat={handleChatSelect} 
+        <aside
+          className={`${showChatMobile ? "hidden md:flex" : "flex"} w-full md:w-[350px] lg:w-[400px] border-r border-gray-800/50 bg-[#0B1221]/20`}
+        >
+          <MessageSidebar
+            conversations={conversations}
+            activeId={selectedChat.id}
+            onSelectChat={handleChatSelect}
           />
         </aside>
 
-        {/* ChatWindow ko selected chat ka data pass kiya */}
-        <main className={`${showChatMobile ? 'flex' : 'hidden md:flex'} flex-1 flex-col`}>
-          <ChatWindow 
-            chatData={selectedChat} 
-            onBack={() => setShowChatMobile(false)} 
+        <main
+          className={`${showChatMobile ? "flex" : "hidden md:flex"} flex-1 flex-col`}
+        >
+          <ChatWindow
+            chatData={selectedChat}
+            onBack={() => setShowChatMobile(false)}
           />
         </main>
       </div>

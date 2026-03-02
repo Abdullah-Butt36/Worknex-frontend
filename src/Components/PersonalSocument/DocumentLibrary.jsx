@@ -1,13 +1,62 @@
-import React from 'react';
-import { Cloud, Search, ChevronDown, FileText, Download, Trash2, MoreHorizontal, UploadCloud } from 'lucide-react';
+import React from "react";
+import {
+  Cloud,
+  Search,
+  ChevronDown,
+  FileText,
+  Download,
+  Trash2,
+  MoreHorizontal,
+  UploadCloud,
+} from "lucide-react";
 
 const DocumentLibrary = () => {
   const documents = [
-    { id: 1, name: 'Contrato de Servicios_v2.pdf', sub: 'Legal • Privado', origin: 'Documento WORKNEX', date: '12 Oct, 2023', size: '2.4 MB', type: 'pdf' },
-    { id: 2, name: 'Brief de Solicitud - Redesign.docx', sub: 'Solicitud', origin: 'Solicitud', date: '10 Oct, 2023', size: '845 KB', type: 'doc' },
-    { id: 3, name: 'Presupuesto Q4 2023.xlsx', sub: 'Finanzas • Privado', origin: 'Subida de usuario', date: '08 Oct, 2023', size: '1.8 MB', type: 'xls' },
-    { id: 4, name: 'Assets de Marketing.zip', sub: 'Marketing', origin: 'Chat', date: '05 Oct, 2023', size: '156 MB', type: 'zip' },
-    { id: 5, name: 'Factura #00459 - Diseño Web.pdf', sub: 'Facturación', origin: 'Facturación', date: '01 Oct, 2023', size: '150 KB', type: 'pdf' },
+    {
+      id: 1,
+      name: "Contrato de Servicios_v2.pdf",
+      sub: "Legal • Privado",
+      origin: "Documento WORKNEX",
+      date: "12 Oct, 2023",
+      size: "2.4 MB",
+      type: "pdf",
+    },
+    {
+      id: 2,
+      name: "Brief de Solicitud - Redesign.docx",
+      sub: "Solicitud",
+      origin: "Solicitud",
+      date: "10 Oct, 2023",
+      size: "845 KB",
+      type: "doc",
+    },
+    {
+      id: 3,
+      name: "Presupuesto Q4 2023.xlsx",
+      sub: "Finanzas • Privado",
+      origin: "Subida de usuario",
+      date: "08 Oct, 2023",
+      size: "1.8 MB",
+      type: "xls",
+    },
+    {
+      id: 4,
+      name: "Assets de Marketing.zip",
+      sub: "Marketing",
+      origin: "Chat",
+      date: "05 Oct, 2023",
+      size: "156 MB",
+      type: "zip",
+    },
+    {
+      id: 5,
+      name: "Factura #00459 - Diseño Web.pdf",
+      sub: "Facturación",
+      origin: "Facturación",
+      date: "01 Oct, 2023",
+      size: "150 KB",
+      type: "pdf",
+    },
   ];
 
   return (
@@ -15,12 +64,15 @@ const DocumentLibrary = () => {
       {/* 1. HEADER & STORAGE CARD */}
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6 mb-12">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">Biblioteca de Documentos</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+            Biblioteca de Documentos
+          </h1>
           <p className="text-slate-500 max-w-xl text-sm md:text-base leading-relaxed">
-            Gestiona, organiza y almacena tus documentos de WORKNEX en un espacio privado y seguro.
+            Gestiona, organiza y almacena tus documentos de WORKNEX en un
+            espacio privado y seguro.
           </p>
         </div>
-        
+
         {/* Storage Indicator Card */}
         <div className="w-full lg:w-72 bg-[#161e2d] border border-slate-800 rounded-2xl p-5 shadow-xl">
           <div className="flex items-center gap-3 mb-4">
@@ -38,7 +90,8 @@ const DocumentLibrary = () => {
             </div>
           </div>
           <p className="text-[10px] text-slate-500 leading-tight">
-            Tu biblioteca crece contigo. Aumenta tu almacenamiento según tu plan.
+            Tu biblioteca crece contigo. Aumenta tu almacenamiento según tu
+            plan.
           </p>
         </div>
       </div>
@@ -46,10 +99,13 @@ const DocumentLibrary = () => {
       {/* 2. ACTION BAR */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
-          <input 
-            type="text" 
-            placeholder="Buscar archivos..." 
+          <Search
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"
+            size={18}
+          />
+          <input
+            type="text"
+            placeholder="Buscar archivos..."
             className="w-full bg-[#161e2d] border border-slate-800 rounded-xl py-3 pl-12 pr-4 text-sm outline-none focus:border-blue-500 transition-all"
           />
         </div>
@@ -77,19 +133,32 @@ const DocumentLibrary = () => {
           </thead>
           <tbody className="divide-y divide-slate-800/50">
             {documents.map((doc) => (
-              <tr key={doc.id} className="hover:bg-slate-800/30 transition-colors group">
+              <tr
+                key={doc.id}
+                className="hover:bg-slate-800/30 transition-colors group"
+              >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-4">
-                    <div className={`p-2.5 rounded-xl ${
-                      doc.type === 'pdf' ? 'bg-red-500/10 text-red-500' : 
-                      doc.type === 'doc' ? 'bg-blue-500/10 text-blue-500' : 
-                      doc.type === 'xls' ? 'bg-green-500/10 text-green-500' : 'bg-orange-500/10 text-orange-500'
-                    }`}>
+                    <div
+                      className={`p-2.5 rounded-xl ${
+                        doc.type === "pdf"
+                          ? "bg-red-500/10 text-red-500"
+                          : doc.type === "doc"
+                            ? "bg-blue-500/10 text-blue-500"
+                            : doc.type === "xls"
+                              ? "bg-green-500/10 text-green-500"
+                              : "bg-orange-500/10 text-orange-500"
+                      }`}
+                    >
                       <FileText size={20} />
                     </div>
                     <div>
-                      <div className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">{doc.name}</div>
-                      <div className="text-[11px] text-slate-500 mt-0.5">{doc.sub}</div>
+                      <div className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">
+                        {doc.name}
+                      </div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">
+                        {doc.sub}
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -101,10 +170,14 @@ const DocumentLibrary = () => {
                 <td className="px-6 py-4 text-sm text-slate-400">{doc.date}</td>
                 <td className="px-6 py-4 text-sm text-slate-400">{doc.size}</td>
                 <td className="px-6 py-4">
-                   <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-2 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white"><Download size={16}/></button>
-                      <button className="p-2 hover:bg-red-500/10 rounded-lg text-slate-400 hover:text-red-500"><Trash2 size={16}/></button>
-                   </div>
+                  <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button className="p-2 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-white">
+                      <Download size={16} />
+                    </button>
+                    <button className="p-2 hover:bg-red-500/10 rounded-lg text-slate-400 hover:text-red-500">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

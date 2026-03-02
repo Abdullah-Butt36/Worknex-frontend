@@ -1,4 +1,5 @@
 import React from "react";
+// import MainLayout from "./Components/ActiveProjectChat/MainLayout";
 // import ProposalHistoryPage from "./Components/ProposalHistory/ProposalHistoryPage";
 // import ProposalViewPage from "./Components/ProposalSoftGate/ProposalViewPage";
 // import ProposalPage from "./Components/SubmitProposal/ProposalPage";
@@ -54,7 +55,7 @@ const App = () => {
       {/* <LegalParent /> */}
       {/* <ContractAcceptance /> */}
       {/* <SubscriptionPage /> */}
-     
+      {/* <MainLayout/> */}
     </div>
   );
 };

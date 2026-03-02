@@ -3,7 +3,6 @@ import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 
 const MessageSidebar = ({ activeId, onSelectChat }) => {
-  // 1. EXACT 5 CHATS FROM DESIGN
   const conversations = [
     {
       id: 1,
