@@ -1,138 +1,157 @@
 import React, { useState } from "react";
-import { User, Building2, X, Check, Settings } from "lucide-react";
+import { User, Building2, X, Check, UserCog } from "lucide-react";
 
 const IdentifyRole = () => {
   const [selectedType, setSelectedType] = useState("individual");
 
   return (
-    <div className="fixed inset-0 bg-gray-900/60 flex items-center justify-center p-4 z-[100] font-sans">
-      <div className="bg-white w-full max-w-[620px] rounded-[24px] md:rounded-[28px] shadow-2xl relative overflow-hidden max-h-[95vh] md:max-h-none overflow-y-auto">
-        {/* Close Button */}
-        <button className="absolute top-5 right-6 text-gray-400 hover:text-black transition-colors">
-          <X size={22} />
-        </button>
+    <div className="fixed inset-0 bg-gray-900/60 flex items-center justify-center p-6 z-[100] font-sans">
+      <div className="bg-white w-full max-w-[640px] rounded-[32px] shadow-2xl relative max-h-[90vh] overflow-y-auto scrollbar-hide">
+        <div className="px-6 md:px-12 pt-8 md:pt-10 pb-8 md:pb-10 flex flex-col items-center relative">
+          <div className="w-full flex justify-end mb-2">
+            <button className="text-gray-400 hover:text-black transition-colors p-2 -mr-4">
+              <X size={24} />
+            </button>
+          </div>
 
-        <div className="px-5 md:px-8 pt-6 md:pt-10 pb-6 md:pb-8 flex flex-col items-center">
-          <div className="w-12 h-12 md:w-16 md:h-16 bg-[#EFF6FF] rounded-full flex items-center justify-center mb-4 md:mb-6">
+          {/* Top Decorative Icon */}
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-[#EFF6FF] rounded-full flex items-center justify-center mb-6 shrink-0">
             <div className="relative">
-              <User size={24} className="text-[#1D61E7] md:size-[32px]" />
-              <div className="absolute -bottom-0.5 -right-0.5 bg-[#1D61E7] rounded-full p-0.5 md:p-1 border-2 border-white shadow-sm flex items-center justify-center">
-                <Settings
-                  size={8}
-                  className="text-white fill-white md:size-[10px]"
-                  strokeWidth={3}
-                />
-              </div>
+              <UserCog size={32} className="text-[#1D61E7] md:size-[40px]" />
+              <div className="absolute -right-1 -bottom-1 bg-white p-1 rounded-full"></div>
             </div>
           </div>
 
-          <h2 className="text-[24px] md:text-[32px] font-[800] text-[#111827] text-center leading-tight mb-2 md:mb-3 tracking-tight">
+          <h2 className="text-[28px] md:text-[36px] font-[700] text-[#111827] text-center leading-tight mb-4 tracking-tight">
             Selecciona tu tipo de cuenta
           </h2>
 
-          <p className="text-gray-500 text-center text-[13px] md:text-[15px] max-w-[420px] mb-6 md:mb-10 leading-relaxed">
+          <p className="text-gray-500 text-center text-[14px] md:text-[16px] max-w-[460px] mb-10 md:mb-12 leading-relaxed font-medium">
             Elige cómo quieres usar WORKNEX para personalizar tu experiencia
             desde el primer día.
           </p>
 
           {/* Selection Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5 w-full mb-6 md:mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full mb-10 md:mb-12">
             {/* Individual Card */}
             <div
               onClick={() => setSelectedType("individual")}
-              className={`relative p-4 md:p-6 rounded-[18px] md:rounded-[24px] border-2 cursor-pointer transition-all flex flex-col
-                ${selectedType === "individual" ? "border-[#1D61E7] bg-[#F0F7FF]" : "border-gray-100"}`}
+              className={`relative p-6 md:p-8 rounded-[24px] md:rounded-[28px] border-2 cursor-pointer transition-all duration-300 flex flex-col
+                ${
+                  selectedType === "individual"
+                    ? "border-[#1D61E7] bg-[#F0F7FF] shadow-lg shadow-blue-100"
+                    : "border-gray-100 hover:border-gray-200"
+                }`}
             >
-              <div className="flex items-center md:block gap-3 md:gap-0 mb-3 md:mb-6">
+              <div
+                className={`absolute top-5 right-5 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all
+                ${selectedType === "individual" ? "border-[#1D61E7] bg-[#1D61E7]" : "border-gray-200 bg-gray-50"}`}
+              >
+                {selectedType === "individual" && (
+                  <Check size={14} className="text-white" strokeWidth={4} />
+                )}
+              </div>
+
+              <div className="mb-4">
                 <div
-                  className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center ${selectedType === "individual" ? "bg-white shadow-sm" : "bg-gray-50"}`}
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${selectedType === "individual" ? "bg-white shadow-md" : "bg-gray-50"}`}
                 >
                   <User
-                    size={16}
+                    size={24}
                     className={
                       selectedType === "individual"
                         ? "text-[#1D61E7]"
-                        : "text-gray-400 md:size-[20px]"
+                        : "text-gray-400"
                     }
                   />
                 </div>
-                <h4 className="font-[800] text-[16px] md:text-[18px] text-black leading-none">
-                  Individual
-                </h4>
               </div>
 
-              {/* Selection Dot */}
-              <div className="absolute top-4 right-4 md:top-5 md:right-5 w-5 h-5 md:w-6 md:h-6 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center">
-                {selectedType === "individual" && (
-                  <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-300 rounded-full" />
-                )}
-              </div>
-
-              <p className="text-gray-500 text-[12px] md:text-[13px] leading-snug mb-3 md:mb-6">
-                Para personas que solicitan u ofrecen servicios profesionales.
+              <h4 className="font-[800] text-[18px] md:text-[20px] text-black mb-2">
+                Individual
+              </h4>
+              <p className="text-gray-500 text-[13px] md:text-[14px] leading-relaxed mb-6 font-medium">
+                Para personas que solicitan u ofrecen servicios profesionales a
+                título personal.
               </p>
 
-              <ul className="space-y-1.5 md:space-y-2 mt-auto">
-                {["Profesionales independientes", "Clientes individuales"].map(
-                  (item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-2 text-[11px] md:text-[12px] text-gray-600 font-medium"
-                    >
-                      <Check
-                        size={12}
-                        className="text-[#1D61E7] md:size-[14px]"
-                      />{" "}
-                      {item}
-                    </li>
-                  ),
-                )}
+              <ul className="space-y-2.5 mt-auto">
+                {[
+                  "Profesionales independientes",
+                  "Clientes individuales",
+                  "Acceso completo según rol",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-700 font-semibold"
+                  >
+                    <Check
+                      size={16}
+                      className="text-[#1D61E7]"
+                      strokeWidth={3}
+                    />{" "}
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
 
             {/* Empresa Card */}
             <div
               onClick={() => setSelectedType("empresa")}
-              className={`relative p-4 md:p-6 rounded-[18px] md:rounded-[24px] border-2 cursor-pointer transition-all flex flex-col
-                ${selectedType === "empresa" ? "border-[#1D61E7] bg-[#F0F7FF]" : "border-gray-100"}`}
+              className={`relative p-6 md:p-8 rounded-[24px] md:rounded-[28px] border-2 cursor-pointer transition-all duration-300 flex flex-col
+                ${
+                  selectedType === "empresa"
+                    ? "border-[#1D61E7] bg-[#F0F7FF] shadow-lg shadow-blue-100"
+                    : "border-gray-100 hover:border-gray-200"
+                }`}
             >
-              <div className="flex items-center md:block gap-3 md:gap-0 mb-3 md:mb-6">
-                <div
-                  className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center ${selectedType === "empresa" ? "bg-white shadow-sm" : "bg-gray-50"}`}
-                >
-                  <Building2
-                    size={16}
-                    className={
-                      selectedType === "empresa"
-                        ? "text-[#1D61E7]"
-                        : "text-gray-400 md:size-[20px]"
-                    }
-                  />
-                </div>
-                <h4 className="font-[800] text-[16px] md:text-[18px] text-black leading-none">
-                  Empresa
-                </h4>
-              </div>
-
-              <div className="absolute top-4 right-4 md:top-5 md:right-5 w-5 h-5 md:w-6 md:h-6 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center">
+              <div
+                className={`absolute top-5 right-5 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all
+                ${selectedType === "empresa" ? "border-[#1D61E7] bg-[#1D61E7]" : "border-gray-200 bg-gray-50"}`}
+              >
                 {selectedType === "empresa" && (
-                  <div className="w-3 h-3 md:w-4 md:h-4 bg-gray-300 rounded-full" />
+                  <Check size={14} className="text-white" strokeWidth={4} />
                 )}
               </div>
 
-              <p className="text-gray-500 text-[12px] md:text-[13px] leading-snug mb-3 md:mb-6">
-                Para compañías o entidades legales que ofrecen servicios.
+              <div className="mb-4">
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${selectedType === "empresa" ? "bg-white shadow-md" : "bg-gray-50"}`}
+                >
+                  <Building2
+                    size={24}
+                    className={
+                      selectedType === "empresa"
+                        ? "text-[#1D61E7]"
+                        : "text-gray-400"
+                    }
+                  />
+                </div>
+              </div>
+
+              <h4 className="font-[800] text-[18px] md:text-[20px] text-black mb-2">
+                Empresa
+              </h4>
+              <p className="text-gray-500 text-[13px] md:text-[14px] leading-relaxed mb-6 font-medium">
+                Para compañías, firmas o entidades legales que ofrecen servicios
+                profesionales.
               </p>
 
-              <ul className="space-y-1.5 md:space-y-2 mt-auto">
-                {["Personas jurídicas", "Servicios B2B"].map((item, i) => (
+              <ul className="space-y-2.5 mt-auto">
+                {[
+                  "Personas jurídicas",
+                  "Servicios B2B",
+                  "Gestión de proyectos y equipos",
+                ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-[11px] md:text-[12px] text-gray-600 font-medium"
+                    className="flex items-center gap-2.5 text-[12px] md:text-[13px] text-gray-700 font-semibold"
                   >
                     <Check
-                      size={12}
-                      className="text-[#1D61E7] md:size-[14px]"
+                      size={16}
+                      className="text-[#1D61E7]"
+                      strokeWidth={3}
                     />{" "}
                     {item}
                   </li>
@@ -141,27 +160,38 @@ const IdentifyRole = () => {
             </div>
           </div>
 
-          {/* Action Area */}
-          <div className="w-full flex flex-col items-center gap-2 md:gap-4">
-            <button className="w-full py-3 md:py-4 bg-[#1D61E7] text-white rounded-xl md:rounded-2xl font-[700] text-[14px] md:text-[16px] hover:bg-blue-700 shadow-lg shadow-blue-500/20">
+          {/* Action Buttons */}
+          <div className="w-full flex flex-col items-center gap-4">
+            <button className="w-full py-4 bg-[#1D61E7] text-white rounded-[18px] font-[700] text-[16px] md:text-[18px] hover:bg-blue-700 transition-all ">
               Continuar
             </button>
-            <button className="text-gray-500 font-bold text-[13px] md:text-[15px] hover:text-black py-1">
+            <button className="text-gray-500 font-extrabold text-[15px] md:text-[17px] hover:text-black transition-colors py-2 mb-4">
               Cancelar
             </button>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="w-full bg-[#F9FAFB]/80 py-4 md:py-6 border-t border-gray-100 text-center">
-          <p className="text-gray-500 text-[12px] md:text-[14px]">
+        {/* Footer - Stays at bottom but scrolls too */}
+        <div className="w-full bg-[#F9FAFB] py-6 md:py-8 border-t border-gray-100 text-center shrink-0">
+          <p className="text-gray-500 text-[14px] md:text-[16px] font-medium">
             ¿Ya tienes cuenta?{" "}
-            <span className="text-[#1D61E7] font-[800] cursor-pointer hover:underline">
+            <span className="text-[#1D61E7] font-[900] cursor-pointer hover:underline ml-1">
               Inicia sesión
             </span>
           </p>
         </div>
       </div>
+
+      {/* Tailwind Style for Hiding Scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };

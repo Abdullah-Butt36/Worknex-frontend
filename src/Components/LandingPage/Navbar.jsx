@@ -36,10 +36,13 @@ const Navbar = () => {
           <button className="hidden sm:block px-4 md:px-6 py-2 md:py-2.5 text-[13px] md:text-[15px] font-[600] text-[#374151] bg-[#F3F4F6] rounded-full hover:bg-gray-200 transition-colors">
             Iniciar Sesión
           </button>
-
+          
           <button className="px-5 md:px-7 py-2 md:py-2.5 text-[13px] md:text-[15px] font-[600] text-white bg-[#1D61E7] rounded-full shadow-sm hover:bg-blue-700 transition-all">
             Regístrate
           </button>
+
+          {/* Yahan Google Translate ka div drop kar dena agar zarurat ho */}
+          <div id="google_translate_element"></div>
 
           <button
             className="lg:hidden p-2 text-black"
@@ -68,7 +71,6 @@ const Navbar = () => {
               {item}
             </a>
           ))}
-
           <button className="sm:hidden w-full py-3 text-[15px] font-[600] text-[#374151] bg-[#F3F4F6] rounded-xl">
             Iniciar Sesión
           </button>

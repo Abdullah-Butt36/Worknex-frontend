@@ -4,10 +4,10 @@ import {
   MoreHorizontal,
   FileText,
   LayoutGrid,
-  Briefcase,
+  
   Folder,
   ChevronRight,
-  MessageSquare,
+
   Handshake,
   Languages,
 } from "lucide-react";
@@ -23,7 +23,7 @@ const DashboardContent = () => {
             Gestiona tus solicitudes y servicios profesionales desde WORKNEX.
           </p>
         </div>
-        <button className="bg-[#1D61E7] hover:bg-[#1a56cc] text-white px-6 py-3 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-100">
+        <button className="bg-[#1D61E7] hover:bg-[#1a56cc] text-white px-6 py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-all ">
           <Plus size={20} strokeWidth={3} />
           <span>Nueva Solicitud</span>
         </button>

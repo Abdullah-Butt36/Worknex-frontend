@@ -68,7 +68,7 @@ const Navbar = () => {
 
                 {/* Progress Bar (Hidden on Mobile) */}
                 <div className="hidden lg:flex flex-col items-end gap-1 border-r border-gray-100 pr-6">
-                  <div className="flex justify-between w-32 text-[9px] text-gray-400 font-bold uppercase tracking-tighter">
+                  <div className="flex justify-between w-32 text-[11px] text-gray-400 font-bold ">
                     <span>Enviadas</span>
                     <span className="text-blue-600">8/10</span>
                   </div>

@@ -11,87 +11,102 @@ import {
 
 const SecureOtp2 = () => {
   return (
-    <div className="fixed inset-0 bg-gray-900/60 flex items-end md:items-center justify-center p-0 md:p-4 z-[100] font-sans">
-      <div className="bg-white w-full md:max-w-[580px] rounded-t-[28px] md:rounded-[24px] shadow-2xl relative overflow-hidden">
-        <button className="absolute top-5 right-6 text-gray-400 hover:text-black hidden md:block">
-          <X size={20} />
+    <div className="fixed inset-0 bg-gray-900/60 flex items-center justify-center p-4 z-[100] font-sans ">
+      <div className="bg-white w-full md:max-w-[540px] rounded-[28px] shadow-2xl relative overflow-hidden max-h-[90vh] flex flex-col">
+        <button className="absolute top-5 right-6 text-gray-400 hover:text-black p-1 z-10 transition-colors">
+          <X size={22} />
         </button>
 
-        <div className="px-6 md:px-10 pt-8 pb-6 flex flex-col">
+        <div className="px-6 md:px-10 pt-10 pb-8 overflow-y-auto scrollbar-hide">
           {/* Header Section */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 bg-blue-50 rounded-lg flex items-center justify-center text-[#1D61E7] shrink-0">
-              <ShieldCheck size={20} />
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-[#1D61E7] shrink-0">
+              <ShieldCheck size={22} />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-[11px] font-[700] text-gray-400 uppercase tracking-tight">
+              <span className="text-[10px] md:text-[11px] font-[800] text-[#1D61E7] uppercase tracking-wider">
                 Paso 1 de 3
               </span>
-              <h3 className="text-[16px] font-[800] text-[#111827]">
+              <h3 className="text-[15px] md:text-[17px] font-[700] text-[#111827]">
                 Verificación de Identidad
               </h3>
             </div>
           </div>
 
-          <h2 className="text-[26px] md:text-[30px] font-[800] text-[#111827] leading-[1.2] mb-3 tracking-tight">
+          <h2 className="text-[20px] md:text-[28px] font-[800] text-[#111827] leading-[1.2] mb-4 tracking-tight text-center md:text-left">
             Para continuar, necesitamos verificar tu identidad
           </h2>
 
-          <p className="text-gray-500 text-[14px] leading-snug mb-6 opacity-90">
+          <p className="text-gray-500 text-[14px] md:text-[15px] leading-relaxed mb-8 font-medium text-center md:text-left">
             Como parte de nuestro compromiso con la seguridad, requerimos que
-            completes un breve proceso de verificación KYC.
+            completes un breve proceso de verificación{" "}
+            <span className="text-[#111827] font-bold">KYC</span>.
           </p>
 
-          <h4 className="text-[13px] font-[800] text-[#111827] mb-3 uppercase tracking-wide">
-            Lo que necesitarás:
+          <h4 className="text-[14px] font-[700] text-black mb-4  text-center md:text-left">
+            Lo que necesitarás tener a mano:
           </h4>
 
-          <div className="space-y-3 mb-8">
+          {/* List of Requirements */}
+          <div className="grid grid-cols-1 gap-3 mb-8">
             <VerificationItem
-              icon={<CreditCard size={18} className="text-[#1D61E7]" />}
+              icon={<CreditCard size={19} className="text-[#1D61E7]" />}
               title="Cédula de Identidad"
               desc="Vigente y en buen estado físico."
             />
             <VerificationItem
-              icon={<Camera size={18} className="text-[#1D61E7]" />}
+              icon={<Camera size={19} className="text-[#1D61E7]" />}
               title="Selfie de seguridad"
               desc="Para validar tu identidad facial."
             />
             <VerificationItem
-              icon={<FileText size={18} className="text-[#1D61E7]" />}
+              icon={<FileText size={19} className="text-[#1D61E7]" />}
               title="Documento tributario"
               desc="Opcional para facturación."
             />
           </div>
 
-          {/* Action Button: Balanced height */}
-          <button className="w-full py-3.5 bg-[#1D61E7] text-white rounded-xl font-[800] text-[15px] flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-md mb-5">
-            Comenzar Verificación <ArrowRight size={18} />
+          {/* Action Button */}
+          <button className="w-full py-4 bg-[#1D61E7] text-white rounded-full font-[700] text-[16px] flex items-center justify-center gap-2 hover:bg-blue-700 transition-all ">
+            Comenzar Verificación <ArrowRight size={19} />
           </button>
 
-          {/* Footer Security Text */}
-          <div className="flex items-center justify-center gap-2 text-gray-400 opacity-80">
-            <Lock size={12} />
-            <span className="text-[11px] font-medium italic">
+          {/* Bottom Security Note */}
+          <div className="flex items-center justify-center gap-2 text-gray-400 pt-4 border-t border-gray-50">
+            <Lock size={12} className="shrink-0" />
+            <span className="text-[12px] font-semibold  text-center">
               Tu información está encriptada y segura con WORKNEX.
             </span>
           </div>
         </div>
       </div>
+
+      {/* Tailwind Utility Style for Scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };
 
 const VerificationItem = ({ icon, title, desc }) => (
-  <div className="flex items-center gap-4 p-3.5 bg-gray-50/70 rounded-xl border border-gray-100">
-    <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center shrink-0">
+  <div className="flex items-center gap-4 p-4 bg-[#F9FAFB] rounded-[20px] border border-gray-100 hover:bg-white hover:shadow-md transition-all duration-300">
+    <div className="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center shrink-0 border border-gray-50">
       {icon}
     </div>
     <div className="flex flex-col">
-      <span className="text-[14px] font-[800] text-[#111827] leading-none mb-1">
+      <span className="text-[14px] md:text-[15px] font-[800] text-[#111827] leading-tight mb-0.5">
         {title}
       </span>
-      <span className="text-[12px] text-gray-500 leading-none">{desc}</span>
+      <span className="text-[12px] text-gray-500 font-medium leading-tight">
+        {desc}
+      </span>
     </div>
   </div>
 );

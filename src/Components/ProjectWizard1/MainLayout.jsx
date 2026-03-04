@@ -38,7 +38,7 @@ const MainLayout = () => {
           <div className="space-y-10">
             {/* 1. Título - Exact Matching Spacing */}
             <div className="flex flex-col gap-3">
-              <label className="text-[12px] font-[900] text-[#111827] uppercase tracking-[0.08em]">
+              <label className="text-[14px] font-[700] text-[#111827] ">
                 Título de la solicitud
               </label>
               <input
@@ -54,7 +54,6 @@ const MainLayout = () => {
                 Categoría del servicio
               </label>
               <div className="relative w-full h-[58px] flex items-center justify-center">
-                {/* Center Grey Oval */}
                 <div className="absolute w-[98%] h-full bg-[#E5E7EB] rounded-full opacity-60"></div>
 
                 <select className="w-full h-full bg-transparent relative z-10 text-center appearance-none cursor-pointer outline-none font-[700] text-gray-500 text-[14px]">
@@ -101,13 +100,13 @@ const MainLayout = () => {
                 Especialidades o habilidades requeridas
               </label>
               <div className="w-full min-h-[58px] p-3 bg-[#F9FAFB] border border-gray-100 rounded-xl flex flex-wrap gap-2.5 items-center">
-                <div className="flex items-center gap-2 bg-[#E0E7FF] text-[#1D61E7] px-4 py-1.5 rounded-lg text-[13px] font-[800]">
+                <div className="flex items-center gap-2 bg-[#E0E7FF] text-[#1D61E7] px-4 py-1.5 rounded-lg text-[13px] font-[700]">
                   Desarrollo Web{" "}
                   <span className="text-[16px] cursor-pointer opacity-50 hover:opacity-100">
                     ×
                   </span>
                 </div>
-                <div className="flex items-center gap-2 bg-[#E0E7FF] text-[#1D61E7] px-4 py-1.5 rounded-lg text-[13px] font-[800]">
+                <div className="flex items-center gap-2 bg-[#E0E7FF] text-[#1D61E7] px-4 py-1.5 rounded-lg text-[13px] font-[700]">
                   Diseño UI{" "}
                   <span className="text-[16px] cursor-pointer opacity-50 hover:opacity-100">
                     ×
@@ -129,10 +128,10 @@ const MainLayout = () => {
 
         {/* --- Sticky-style Footer Buttons: Exact Placement --- */}
         <div className="w-full max-w-[780px] flex items-center justify-between mt-12 mb-6 px-1">
-          <button className="text-[#1D61E7] font-[900] text-[15px] tracking-wide hover:opacity-80 transition-all">
+          <button className="text-gray-600 font-[700] text-[15px] tracking-wide hover:opacity-80 transition-all">
             Cancelar
           </button>
-          <button className="bg-[#1D61E7] text-white px-10 py-3.5 rounded-xl font-[900] text-[15px] flex items-center gap-2.5 shadow-lg shadow-blue-500/20 active:scale-95 transition-all">
+          <button className="bg-[#1D61E7] text-white px-10 py-3.5 rounded-2xl font-[700] text-[15px] flex items-center gap-2.5">
             Siguiente <span className="text-[18px]">→</span>
           </button>
         </div>

@@ -7,16 +7,15 @@ const RoleSelectionPage = () => {
   return (
     <div className="min-h-screen bg-[#F9FAFB] font-sans flex flex-col">
       {/* --- Simple Navbar --- */}
-      <nav className="w-full px-6 md:px-16 h-[100px] flex items-center justify-between">
+      <nav className="w-full bg-white px-6 md:px-16 h-[100px] flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-[#1D61E7] rounded-xl flex items-center justify-center text-white">
             <Store size={22} fill="white" />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="font-[800] text-[18px] tracking-tighter">
-              WORK
+            <span className="font-[700] text-[18px] md:text-[22px] tracking-tight text-black uppercase">
+              WORKNEX
             </span>
-            <span className="font-[800] text-[18px] tracking-tighter">NEX</span>
           </div>
         </div>
         <button className="flex items-center gap-2 text-gray-600 font-bold text-sm hover:text-black">
@@ -25,10 +24,10 @@ const RoleSelectionPage = () => {
       </nav>
 
       {/* --- Main Content --- */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 pb-20">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 mt-8 pb-20">
         {/* Header Text */}
         <div className="text-center max-w-2xl mb-12">
-          <h1 className="text-[48px] md:text-[56px] font-[800] text-[#111827] leading-[1.1] tracking-tight mb-6">
+          <h1 className="text-[48px] md:text-[56px] font-[700] text-[#111827] leading-[1.1] tracking-tight mb-6">
             ¿Cómo quieres usar <br /> WORKNEX?
           </h1>
           <p className="text-gray-500 text-[18px] leading-relaxed">

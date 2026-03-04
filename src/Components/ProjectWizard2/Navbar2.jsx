@@ -31,7 +31,7 @@ const Navbar2 = () => {
       </div>
 
       <div className="flex items-center gap-3 md:gap-5">
-        <button className="hidden sm:block bg-[#1D61E7] text-white px-7 py-2.5 rounded-full font-[800] text-[14px] hover:bg-blue-700 transition-all shadow-md">
+        <button className="hidden sm:block bg-[#1D61E7] text-white px-7 py-2.5 rounded-full font-[700] text-[14px] hover:bg-blue-700 transition-all shadow-md">
           Publicar proyecto
         </button>
 
