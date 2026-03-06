@@ -2,8 +2,10 @@ import React from "react";
 import { Check } from "lucide-react";
 import Footer from "./ProjectFooter";
 import ProjectNav from "./ProjectNav";
+import { useNavigate } from "react-router-dom";
 
 const ProjectPublication = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col bg-white font-sans antialiased">
       {/* 1. Navbar */}
@@ -41,7 +43,10 @@ const ProjectPublication = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col items-center w-full space-y-6">
-            <button className="bg-[#1D61E7] text-white px-12 py-5 rounded-[18px] font-[700] text-[18px] hover:bg-[#1a56cc] transition-all hover:shadow-xl hover:shadow-blue-50 active:scale-[0.98] w-full max-w-[360px]">
+            <button 
+              onClick={() => navigate("/client-dashboard")}
+              className="bg-[#1D61E7] text-white px-12 py-5 rounded-[18px] font-[700] text-[18px] hover:bg-[#1a56cc] transition-all hover:shadow-xl hover:shadow-blue-50 active:scale-[0.98] w-full max-w-[360px]"
+            >
               Gestionar solicitud
             </button>
 
@@ -50,7 +55,10 @@ const ProjectPublication = () => {
               aceptado una propuesta.
             </p>
 
-            <button className="text-[#111827] text-[17px] font-[700] hover:text-blue-700 transition-colors pt-4">
+            <button 
+              onClick={() => navigate("/")}
+              className="text-[#111827] text-[17px] font-[700] hover:text-blue-700 transition-colors pt-4"
+            >
               Volver al Inicio
             </button>
           </div>

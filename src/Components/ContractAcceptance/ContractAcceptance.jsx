@@ -11,15 +11,20 @@ import {
   Info,
   ArrowRight,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ContractAcceptance = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full bg-[#020617] flex items-center justify-center p-4 md:p-10 font-inter antialiased">
       {/* Main Modal Container */}
       <div className="bg-[#151D2F] w-full max-w-[920px] rounded-[32px] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-slate-800/50 flex flex-col my-4">
         {/* --- HEADER --- */}
         <div className="relative p-6 md:p-10 border-b border-slate-800/60 bg-[#0F172A]">
-          <button className="absolute right-4 top-5 md:right-8 md:top-10 text-slate-500 hover:text-white transition-all p-2 hover:bg-slate-800/30 rounded-full z-10">
+          <button 
+            onClick={() => navigate(-1)}
+            className="absolute right-4 top-5 md:right-8 md:top-10 text-slate-500 hover:text-white transition-all p-2 hover:bg-slate-800/30 rounded-full z-10"
+          >
             <X size={22} className="md:w-7 md:h-7" />
           </button>
 
@@ -194,10 +199,16 @@ const ContractAcceptance = () => {
           </div>
 
           <div className="flex items-center justify-between w-full md:w-auto gap-8 shrink-0">
-            <button className="text-white font-bold text-[14px] hover:text-slate-400 transition-colors tracking-wide">
+            <button 
+              onClick={() => navigate(-1)}
+              className="text-white font-bold text-[14px] hover:text-slate-400 transition-colors tracking-wide"
+            >
               Cancelar
             </button>
-            <button className="bg-[#2563EB] hover:bg-blue-500 text-white px-6 md:px-8 py-3.5 md:py-4 rounded-[14px] font-bold text-[14px] md:text-[15px] flex items-center gap-2.5 transition-all shadow-lg active:scale-95">
+            <button 
+              onClick={() => navigate("/project-plan")}
+              className="bg-[#2563EB] hover:bg-blue-500 text-white px-6 md:px-8 py-3.5 md:py-4 rounded-[14px] font-bold text-[14px] md:text-[15px] flex items-center gap-2.5 transition-all shadow-lg active:scale-95"
+            >
               Aceptar <span className="hidden sm:inline">y Comenzar</span>{" "}
               <ArrowRight size={18} />
             </button>

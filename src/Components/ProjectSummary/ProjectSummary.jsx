@@ -12,8 +12,10 @@ import {
   ArrowLeft,
   SendHorizontal,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ProjectSummary = () => {
+  const navigate = useNavigate();
   // Hex equivalent of rgba(246, 246, 248, 1) is #F6F6F8 const grayBg = "#F6F6F8";
 
   return (
@@ -144,7 +146,10 @@ const ProjectSummary = () => {
 
         {/* Action Buttons */}
         <div className="mt-14 flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-          <button className="flex items-center gap-2 text-[#6B7280] font-bold hover:text-black transition-all order-2 md:order-1">
+          <button 
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-[#6B7280] font-bold hover:text-black transition-all order-2 md:order-1"
+          >
             <ArrowLeft className="w-5 h-5" /> Atrás
           </button>
           <p className="text-[13px] text-[#9CA3AF] text-center max-w-[480px] leading-snug order-3 md:order-2">
@@ -152,7 +157,10 @@ const ProjectSummary = () => {
             proveedores elegibles en WORKNEX. Puedes editar o cancelar la
             solicitud siempre que no hayas aceptado una propuesta.
           </p>
-          <button className="bg-[#1D61F2] hover:bg-[#1A56D6] text-white px-12 py-4 rounded-full font-bold flex items-center gap-3 transition-all shadow-lg shadow-blue-100 w-full md:w-auto justify-center order-1 md:order-3">
+          <button 
+            onClick={() => navigate("/project-publication")}
+            className="bg-[#1D61F2] hover:bg-[#1A56D6] text-white px-12 py-4 rounded-full font-bold flex items-center gap-3 transition-all shadow-lg shadow-blue-100 w-full md:w-auto justify-center order-1 md:order-3"
+          >
             Publicar solicitud <SendHorizontal className="w-4 h-4 fill-white" />
           </button>
         </div>

@@ -12,25 +12,30 @@ import {
   X,
   Briefcase,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Inicio");
+  const navigate = useNavigate();
 
   const menuItems = [
-    { name: "Inicio", icon: Home },
-    { name: "Oportunidades", icon: Radar },
-    { name: "Propuestas", icon: Inbox },
-    { name: "Servicios", icon: Handshake },
-    { name: "Mensajes", icon: MessageSquare, badge: 2 },
-    { name: "Plan y Facturación", icon: LayoutGrid },
-    { name: "Configuración", icon: Settings },
+    { name: "Inicio", icon: Home, route: "/dashboard-home" },
+    { name: "Oportunidades", icon: Radar, route: "/opportunities-feed" },
+    { name: "Propuestas", icon: Inbox, route: "/proposal-history" },
+    { name: "Servicios", icon: Handshake, route: "/client-dashboard" },
+    { name: "Mensajes", icon: MessageSquare, badge: 2, route: "/message-center" },
+    { name: "Plan y Facturación", icon: LayoutGrid, route: "/subscription" },
+    { name: "Configuración", icon: Settings, route: "/subscription" },
   ];
 
-  const handleItemClick = (name) => {
+  const handleItemClick = (name, route) => {
     setActiveTab(name);
     if (window.innerWidth < 1024) {
-      setIsOpen(true);
+      setIsOpen(false);
+    }
+    if (route) {
+      navigate(route);
     }
   };
 
@@ -56,7 +61,10 @@ const Sidebar = () => {
         </button>
 
         {/* Logo Section */}
-        <div className="px-7 py-9 flex items-center gap-3">
+        <div 
+          onClick={() => navigate("/")}
+          className="px-7 py-9 flex items-center gap-3 cursor-pointer"
+        >
           <div className="bg-[#1D61E7] w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ">
             <Briefcase size={22} className="text-white fill-white" />
           </div>
@@ -67,7 +75,10 @@ const Sidebar = () => {
 
         {/* Profile Card */}
         <div className="px-4 mb-8">
-          <div className="bg-white border border-gray-100 p-3 rounded-[20px] flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+          <div 
+            onClick={() => navigate("/personal-socument")}
+            className="bg-white border border-gray-100 p-3 rounded-[20px] flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer group"
+          >
             <div className="w-11 h-11 bg-[#CBD5E0] rounded-full border-2 border-white overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
               <img
                 src="https://ui-avatars.com/api/?name=Alejandro+M&background=cbd5e0&color=4a5568"
@@ -92,7 +103,7 @@ const Sidebar = () => {
             return (
               <div
                 key={idx}
-                onClick={() => handleItemClick(item.name)}
+                onClick={() => handleItemClick(item.name, item.route)}
                 className={`group relative flex items-center justify-between px-4 py-3.5 cursor-pointer rounded-2xl transition-all duration-200 ${
                   isActive
                     ? "bg-[#EBF2FF] text-[#1D61E7] shadow-sm"
@@ -127,7 +138,10 @@ const Sidebar = () => {
         </nav>
 
         <div className="p-5 border-t border-gray-50 bg-white/50">
-          <button className="w-full bg-[#1D61E7] text-white py-4 rounded-full font-black flex items-center justify-center gap-2  hover:bg-blue-700">
+          <button 
+            onClick={() => navigate("/wizard-1")}
+            className="w-full bg-[#1D61E7] text-white py-4 rounded-full font-black flex items-center justify-center gap-2  hover:bg-blue-700"
+          >
             <Plus size={20} strokeWidth={3} />
             <span className="text-[15px]">Nuevo Servicio</span>
           </button>

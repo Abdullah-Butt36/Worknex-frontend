@@ -34,7 +34,7 @@ import ActiveChat from "./Components/ActiveProjectChat/MainLayout";
 import SubscriptionPage from "./Components/SubscriptionPlan/SubscriptionPage";
 import VerificationLayout from "./Components/IdentityVerification/VerificationLayout";
 import LegalParent from "./Components/LegalDocument/LegalParent";
-import PersonalDocument from "./Components/PersonalSocument/DashboardLayout";
+import PersonalSocumentLayout from "./Components/PersonalSocument/PersonalSocumentLayout";
 import ContractAcceptance from "./Components/ContractAcceptance/ContractAcceptance";
 import ProjectPlan from "./Components/ProjectPlan/MainLayout";
 
@@ -59,6 +59,7 @@ const App = () => {
         <Route path="/wizard-2" element={<ProjectWizard2 />} />
         <Route path="/project-publication" element={<ProjectPublication />} />
         <Route path="/project-plan" element={<ProjectPlan />} />
+        <Route path="/project-summary" element={<ProjectSummary />} />
 
         {/* 4. Opportunities & Proposals */}
         <Route path="/opportunities-feed" element={<OpportunityLayout />} />
@@ -74,7 +75,7 @@ const App = () => {
         <Route path="/subscription" element={<SubscriptionPage />} />
         <Route path="/identity-verification" element={<VerificationLayout />} />
         <Route path="/legal-documents" element={<LegalParent />} />
-        <Route path="/personal-documents" element={<PersonalDocument />} />
+        <Route path="/personal-socument" element={<PersonalSocumentLayout />} />
         <Route path="/contract-acceptance" element={<ContractAcceptance />} />
 
         {/* Default Redirect */}

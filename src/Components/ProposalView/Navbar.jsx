@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Bell, Menu, X, Briefcase } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
-    { name: 'Oportunidades', href: '#' },
-    { name: 'Mis Propuestas', href: '#', active: true },
-    { name: 'Mensajes', href: '#' },
-    { name: 'Servicios', href: '#' },
+    { name: 'Oportunidades', href: '/opportunities-feed' },
+    { name: 'Mis Propuestas', href: '/proposal-history', active: true },
+    { name: 'Mensajes', href: '/message-center' },
+    { name: 'Servicios', href: '/wizard-1' },
   ];
 
   return (
@@ -27,14 +29,14 @@ const Navbar = () => {
             </button>
 
             {/* --- New Briefcase Logo --- */}
-            <div className="flex items-center gap-3 cursor-pointer shrink-0">
-              <div className="w-8 h-8 md:w-9 md:h-9 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-900/20">
+            <Link to="/" className="flex items-center gap-3 cursor-pointer shrink-0 group">
+              <div className="w-8 h-8 md:w-9 md:h-9 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform">
                 <Briefcase className="w-4 h-4 md:w-5 md:h-5 text-white fill-current" />
               </div>
-              <span className="font-bold text-[18px] md:text-[20px] tracking-tighter text-white uppercase">
+              <span className="font-bold text-[18px] md:text-[20px] tracking-tighter text-white uppercase group-hover:text-blue-400 transition-colors">
                 WORKNEX
               </span>
-            </div>
+            </Link>
           </div>
 
           {/* RIGHT: Nav Links & Profile */}
@@ -42,21 +44,24 @@ const Navbar = () => {
             {/* Desktop Links - Positioned next to profile as per design */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className={`text-[13px] font-medium transition-colors ${
                     link.active ? 'text-white' : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
 
             {/* Profile Avatar */}
             <div className="flex items-center ml-2 border-l border-gray-700 pl-4 md:pl-6">
-              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[#334155] border border-gray-600 overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all">
+              <div 
+                onClick={() => navigate('/personal-socument')}
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[#334155] border border-gray-600 overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all"
+              >
                 <img src="https://ui-avatars.com/api/?name=User&background=475569&color=fff" alt="Profile" />
               </div>
             </div>
@@ -70,15 +75,16 @@ const Navbar = () => {
         <div className="md:hidden bg-[#1e293b] border-t border-gray-800">
           <div className="px-4 py-4 space-y-2">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
+                onClick={() => setIsMenuOpen(false)}
                 className={`block px-3 py-3 text-base font-medium rounded-lg ${
                     link.active ? 'text-white bg-blue-600/10 border border-blue-500/20' : 'text-gray-400'
                 }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

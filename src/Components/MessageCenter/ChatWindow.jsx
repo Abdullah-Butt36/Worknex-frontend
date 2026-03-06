@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -10,10 +10,31 @@ import {
   Download,
   MoreHorizontal,
   SendHorizontal,
+  X,
+  FileText as FileIcon,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ChatWindow = ({ chatData, onBack }) => {
+  const navigate = useNavigate();
+  const [inputText, setInputText] = useState("");
+  const [attachments, setAttachments] = useState([]);
+  
+  const fileInputRef = useRef(null);
+  const imageInputRef = useRef(null);
+
   if (!chatData) return <div className="flex-1 bg-[#060B15]" />;
+
+  const handleFileUpload = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+      setAttachments([...attachments, ...files]);
+    }
+  };
+
+  const removeAttachment = (indexToRemove) => {
+    setAttachments(attachments.filter((_, index) => index !== indexToRemove));
+  };
 
   return (
     <div className="flex flex-col h-full bg-[#060B15] overflow-hidden">
@@ -75,7 +96,10 @@ const ChatWindow = ({ chatData, onBack }) => {
             <span className="hidden sm:inline">Marcar como completado</span>
           </button>
 
-          <button className="flex items-center gap-1.5 bg-white/5 text-gray-300 px-2 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-[11px] font-[700] border border-gray-800 hover:bg-white/10 transition-all">
+          <button 
+            onClick={() => navigate('/client-payment-gate')}
+            className="flex items-center gap-1.5 bg-white/5 text-gray-300 px-2 md:px-4 py-1.5 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-[11px] font-[700] border border-gray-800 hover:bg-white/10 transition-all"
+          >
             <FileText size={14} className="text-gray-400" />{" "}
             <span className="hidden sm:inline">Ver Contrato</span>
           </button>
@@ -188,24 +212,72 @@ const ChatWindow = ({ chatData, onBack }) => {
 
       {/* --- INPUT AREA (Responsive Padding/Rounding) --- */}
       <footer className="p-3 md:p-8 pt-2 shrink-0">
-        <div className="max-w-[900px] mx-auto bg-[#111827] border border-gray-800 rounded-[20px] md:rounded-[24px] p-3 md:p-4 focus-within:border-gray-700 transition-all shadow-2xl">
+        <div className="max-w-[900px] mx-auto bg-[#111827] border border-gray-800 rounded-[20px] md:rounded-[24px] p-3 md:p-4 focus-within:border-gray-700 transition-all shadow-2xl flex flex-col">
+          
+          {/* Attachment Previews Area */}
+          {attachments.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-3 pb-3 border-b border-gray-800/50">
+              {attachments.map((file, idx) => {
+                const isImage = file.type.startsWith("image/");
+                return (
+                  <div key={idx} className="relative group flex items-center gap-2 bg-[#1F2937] border border-gray-700 rounded-lg p-1.5 pr-3 max-w-[200px]">
+                    {isImage ? (
+                      <div className="w-8 h-8 rounded shrink-0 overflow-hidden bg-gray-800 flex items-center justify-center">
+                         <img src={URL.createObjectURL(file)} alt="preview" className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8 rounded bg-blue-500/10 flex items-center justify-center shrink-0">
+                         <FileIcon size={14} className="text-blue-500" />
+                      </div>
+                    )}
+                    <span className="text-[12px] text-gray-300 truncate">{file.name}</span>
+                    <button 
+                      onClick={() => removeAttachment(idx)}
+                      className="absolute -top-2 -right-2 bg-gray-700 hover:bg-red-500 text-white rounded-full p-0.5 shadow-md transition-colors"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           <textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
             placeholder="Escribe un mensaje aquí..."
             className="w-full bg-transparent border-none outline-none text-white text-[13px] md:text-[14px] resize-none h-[45px] md:h-[60px] no-scrollbar"
           ></textarea>
 
           <div className="flex items-center justify-between mt-2 md:mt-4 border-t border-gray-800/50 pt-3 md:pt-4">
             <div className="flex items-center gap-3 md:gap-5 text-gray-500 overflow-x-auto no-scrollbar">
-              <button className="hover:text-white transition-colors shrink-0">
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="hover:text-white transition-colors shrink-0 outline-none"
+                title="Adjuntar Archivo"
+              >
                 <Paperclip size={18} md:size={20} />
               </button>
-              <button className="hidden xs:block hover:text-white transition-colors shrink-0">
+              <button 
+                className="hidden xs:block hover:text-white transition-colors shrink-0 outline-none"
+                title="Emoji"
+              >
                 <Smile size={18} md:size={20} />
               </button>
-              <button className="hover:text-white transition-colors shrink-0">
+              <button 
+                onClick={() => imageInputRef.current?.click()}
+                className="hover:text-white transition-colors shrink-0 outline-none"
+                title="Adjuntar Imagen"
+              >
                 <ImageIcon size={18} md:size={20} />
               </button>
-              <button className="hover:text-white transition-colors shrink-0">
+              
+              {/* Hidden file inputs */}
+              <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="hidden" multiple />
+              <input type="file" ref={imageInputRef} onChange={handleFileUpload} accept="image/*" className="hidden" multiple />
+
+              <button className="hover:text-white transition-colors shrink-0 outline-none">
                 <MoreHorizontal size={18} md:size={20} />
               </button>
             </div>

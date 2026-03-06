@@ -4,15 +4,16 @@ import {
   MoreHorizontal,
   FileText,
   LayoutGrid,
-  
   Folder,
   ChevronRight,
 
   Handshake,
   Languages,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const DashboardContent = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex-1 bg-[#F8FAFC] min-h-screen p-6 md:p-10 lg:ml-[260px]">
       {/* --- HEADER SECTION --- */}
@@ -23,7 +24,10 @@ const DashboardContent = () => {
             Gestiona tus solicitudes y servicios profesionales desde WORKNEX.
           </p>
         </div>
-        <button className="bg-[#1D61E7] hover:bg-[#1a56cc] text-white px-6 py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-all ">
+        <button 
+          onClick={() => navigate("/wizard-1")}
+          className="bg-[#1D61E7] hover:bg-[#1a56cc] text-white px-6 py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-all "
+        >
           <Plus size={20} strokeWidth={3} />
           <span>Nueva Solicitud</span>
         </button>
@@ -67,7 +71,8 @@ const DashboardContent = () => {
         ].map((card, idx) => (
           <div
             key={idx}
-            className="bg-white p-6 rounded-[28px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            onClick={() => card.title === "Documentos" && navigate("/personal-socument")}
+            className={`bg-white p-6 rounded-[28px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow ${card.title === "Documentos" ? "cursor-pointer" : ""}`}
           >
             <div className="flex justify-between items-start mb-4">
               <div className={`${card.color} p-2.5 rounded-xl text-white`}>

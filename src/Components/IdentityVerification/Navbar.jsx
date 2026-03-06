@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Search, Bell, MessageSquare, Menu, X } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-[100] w-full border-b border-slate-800/50 bg-[#0F172A] font-inter">
@@ -17,7 +19,7 @@ const Navbar = () => {
           </button>
 
           {/* THE CORRECT WIDE LOGO */}
-          <div className="flex items-center gap-5 group cursor-pointer shrink-0">
+          <Link to="/" className="flex items-center gap-5 group cursor-pointer shrink-0">
             <div
               className="w-8 h-8 md:w-9 md:h-9 bg-blue-600 flex items-center justify-center transition-transform group-hover:scale-110"
               style={{
@@ -28,7 +30,7 @@ const Navbar = () => {
             <span className="font-[700] text-[18px] md:text-[22px] tracking-tight text-white uppercase">
               WORKNEX
             </span>
-          </div>
+          </Link>
 
           {/* SEARCH BAR (Desktop) */}
           <div className="relative w-[240px] lg:w-[320px] hidden md:block">
@@ -47,39 +49,42 @@ const Navbar = () => {
         <div className="flex items-center gap-2 md:gap-8">
           {/* NAV LINKS (Desktop Only) */}
           <div className="hidden xl:flex items-center gap-7 text-white text-[14px] font-semibold">
-            {["Oportunidades", "Proveedores", "Servicios", "Comunidad"].map(
-              (link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="hover:text-slate-400 transition-colors tracking-tight"
-                >
-                  {link}
-                </a>
-              ),
-            )}
+            {[
+              { name: "Oportunidades", to: "/opportunities-feed" },
+              { name: "Proveedores", to: "/opportunities-feed" },
+              { name: "Servicios", to: "/wizard-1" },
+              { name: "Comunidad", to: "/dashboard-home" }
+            ].map((link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                className="hover:text-slate-400 transition-colors tracking-tight"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
 
           {/* ACTION BUTTONS (Notification & Mail - Visible on Mobile) */}
           <div className="flex items-center gap-1 md:gap-4 md:border-l border-slate-800/80 md:pl-8">
-            <button className="p-2 text-slate-400 hover:text-white relative hover:bg-slate-800/40 rounded-full transition-all">
+            <Link to="/message-center" className="p-2 text-slate-400 hover:text-white relative hover:bg-slate-800/40 rounded-full transition-all">
               <Bell size={20} strokeWidth={2} />
               <span className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full border-[2px] border-[#0F172A]"></span>
-            </button>
+            </Link>
 
-            <button className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/40 rounded-full transition-all">
+            <Link to="/active-chat" className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/40 rounded-full transition-all">
               <MessageSquare size={20} strokeWidth={2} />
-            </button>
+            </Link>
 
             {/* USER PROFILE */}
-            <div className="flex items-center gap-1 cursor-pointer group shrink-0 ml-1">
+            <Link to="/personal-socument" className="flex items-center gap-1 cursor-pointer group shrink-0 ml-1">
               <div className="w-8 h-8 md:w-9 md:h-9 bg-[#D9D9D9] rounded-full border-2 border-slate-800 overflow-hidden transition-transform group-hover:scale-105">
                 <img
                   src="https://ui-avatars.com/api/?name=Alex+Morgan&background=475569&color=fff"
                   alt="User"
                 />
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </nav>
@@ -104,18 +109,21 @@ const Navbar = () => {
           </div>
 
           <nav className="flex flex-col gap-1">
-            {["Oportunidades", "Proveedores", "Servicios", "Comunidad"].map(
-              (link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="text-white text-[15px] font-semibold hover:text-slate-400 transition-colors py-3 border-b border-slate-800/30 last:border-0"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link}
-                </a>
-              ),
-            )}
+            {[
+              { name: "Oportunidades", to: "/opportunities-feed" },
+              { name: "Proveedores", to: "/opportunities-feed" },
+              { name: "Servicios", to: "/wizard-1" },
+              { name: "Comunidad", to: "/dashboard-home" }
+            ].map((link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                className="text-white text-[15px] font-semibold hover:text-slate-400 transition-colors py-3 border-b border-slate-800/30 last:border-0"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>

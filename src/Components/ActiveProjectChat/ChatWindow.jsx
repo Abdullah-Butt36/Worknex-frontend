@@ -7,15 +7,36 @@ import {
   CheckCircle2,
   Download,
   FileText,
-  Menu,
+  ArrowLeft,
   SendHorizontal,
+  X,
+  FileText as FileIcon,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ChatWindow = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
+  const [attachments, setAttachments] = useState([]);
   const chatEndRef = useRef(null);
+  
+  const fileInputRef = useRef(null);
+  const imageInputRef = useRef(null);
 
-  const messages = [
+  const handleFileUpload = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+      setAttachments([...attachments, ...files]);
+    }
+   
+    e.target.value = null;
+  };
+
+  const removeAttachment = (indexToRemove) => {
+    setAttachments(attachments.filter((_, index) => index !== indexToRemove));
+  };
+
+  const [messages, setMessages] = useState([
     {
       id: 1,
       sender: "client",
@@ -45,7 +66,35 @@ const ChatWindow = () => {
       time: "10:45",
       text: "Perfecto trabajo. Procederé con la aprobación del pago.",
     },
-  ];
+  ]);
+
+  const handleSendMessage = () => {
+    if (!input.trim() && attachments.length === 0) return;
+
+    const newMessage = {
+      id: Date.now(),
+      sender: "me",
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      text: input,
+      attachments: attachments.map(file => ({
+        name: file.name,
+        size: (file.size / 1024 / 1024).toFixed(1) + " MB",
+        type: file.type.startsWith("image/") ? "image" : "file",
+        url: URL.createObjectURL(file)
+      }))
+    };
+
+    setMessages([...messages, newMessage]);
+    setInput("");
+    setAttachments([]);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -71,6 +120,13 @@ const ChatWindow = () => {
         </div>
 
         <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <button 
+            onClick={() => navigate('/message-center')}
+            className="md:hidden text-white/50 hover:text-white p-2"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          
           {/* Vincular WhatsApp: Icon only on small screens, text on large */}
           <button className="text-[#00E676] hover:bg-[#00E676]/10 p-2 rounded-xl transition-all flex items-center gap-2 text-[10px] md:text-[11px] font-bold uppercase tracking-wider border border-[#00E676]/20 md:border-transparent">
             <div className="w-4 h-4 rounded-full border-2 border-[#00E676] flex items-center justify-center text-[8px] shrink-0">
@@ -78,7 +134,7 @@ const ChatWindow = () => {
             </div>
             <span className="hidden sm:inline">Vincular WhatsApp</span>
           </button>
-          <button className="hidden md:block text-slate-500 :hidden hover:text-white p-1">
+          <button className="hidden md:block text-slate-500 hover:text-white p-1">
             <MoreVertical size={20} />
           </button>
         </div>
@@ -108,7 +164,29 @@ const ChatWindow = () => {
                 {msg.text}
               </div>
 
-              {/* File Attachment: More compact on mobile */}
+              {/* Render Attachments in the chat bubble if any */}
+              {msg.attachments && msg.attachments.length > 0 && (
+                <div className="w-full mt-2 space-y-2">
+                  {msg.attachments.map((file, idx) => (
+                    <div key={idx} className="bg-[#0D1814] border border-white/5 p-3 rounded-xl flex items-center gap-3 hover:border-[#00E676]/30 transition-all group">
+                      <div className={file.type === "image" ? "bg-green-500/10 p-1 rounded-lg shrink-0" : "bg-red-500/10 p-2 rounded-lg shrink-0"}>
+                        {file.type === "image" ? (
+                          <img src={file.url} alt="upload" className="w-8 h-8 object-cover rounded" />
+                        ) : (
+                          <FileText className="text-red-500" size={18} />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-white text-[11px] font-bold truncate">{file.name}</p>
+                        <p className="text-slate-500 text-[9px] uppercase font-bold">{file.size}</p>
+                      </div>
+                      <Download className="text-slate-400 group-hover:text-[#00E676] shrink-0" size={16} />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Existing File Attachment logic for hardcoded messages */}
               {msg.type === "file" && (
                 <div className="w-full mt-2 bg-[#0D1814] border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl flex items-center gap-3 md:gap-4 hover:border-[#00E676]/30 transition-all group">
                   <div className="bg-red-500/10 p-2 rounded-lg shrink-0">
@@ -150,35 +228,78 @@ const ChatWindow = () => {
       </div>
 
       {/* --- 3. INPUT FIELD (Responsive Padding & Layout) --- */}
-      <div className="absolute bottom-0 left-0 w-full p-4 md:p-10 bg-gradient-to-t from-[#06110D] via-[#06110D]/90 to-transparent z-30">
-        <div className="max-w-5xl mx-auto bg-[#112119]/90 border border-white/10 backdrop-blur-2xl rounded-[30px] md:rounded-[40px] h-[54px] md:h-[70px] flex items-center px-4 md:px-6 shadow-2xl focus-within:border-[#00E676]/30 transition-all">
-          {/* Left Buttons: Smaller gaps on mobile */}
-          <div className="flex items-center gap-3 md:gap-4 mr-2 md:mr-4 text-slate-400">
-            <PlusCircle
-              className="cursor-pointer hover:text-[#00E676] transition-all"
-              size={20}
-              md:size={22}
-            />
-            <ImageIcon
-              className="cursor-pointer hover:text-[#00E676] transition-all"
-              size={20}
-              md:size={22}
-            />
-          </div>
+      <div className="absolute bottom-0 left-0 w-full p-4 md:p-10 z-30 pointer-events-none">
+        <div className="max-w-5xl mx-auto flex flex-col pointer-events-auto">
+
+          {/* Attachment Previews Area */}
+          {attachments.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-3 bg-[#112119]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-3 shadow-2xl">
+              {attachments.map((file, idx) => {
+                const isImage = file.type.startsWith("image/");
+                return (
+                  <div key={idx} className="relative group flex items-center gap-2 bg-[#0A1A12] border border-[#00E676]/20 rounded-lg p-1.5 pr-3 max-w-[200px]">
+                    {isImage ? (
+                      <div className="w-8 h-8 rounded shrink-0 overflow-hidden bg-black flex items-center justify-center">
+                         <img src={URL.createObjectURL(file)} alt="preview" className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8 rounded bg-[#00E676]/10 flex items-center justify-center shrink-0">
+                         <FileIcon size={14} className="text-[#00E676]" />
+                      </div>
+                    )}
+                    <span className="text-[12px] text-gray-300 truncate font-semibold">{file.name}</span>
+                    <button 
+                      onClick={() => removeAttachment(idx)}
+                      className="absolute -top-2 -right-2 bg-slate-800 hover:bg-red-500 text-white rounded-full p-0.5 shadow-md transition-colors"
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="bg-[#112119]/90 border border-white/10 backdrop-blur-2xl rounded-[30px] md:rounded-[40px] h-[54px] md:h-[70px] flex items-center px-4 md:px-6 shadow-2xl focus-within:border-[#00E676]/30 transition-all">
+            {/* Left Buttons: Smaller gaps on mobile */}
+            <div className="flex items-center gap-3 md:gap-4 mr-2 md:mr-4 text-slate-400">
+              <button onClick={() => fileInputRef.current?.click()} className="outline-none">
+                <PlusCircle
+                  className="cursor-pointer hover:text-[#00E676] transition-all"
+                  size={20}
+                  md:size={22}
+                />
+              </button>
+              <button onClick={() => imageInputRef.current?.click()} className="outline-none">
+                <ImageIcon
+                  className="cursor-pointer hover:text-[#00E676] transition-all"
+                  size={20}
+                  md:size={22}
+                />
+              </button>
+              {/* Hidden Inputs */}
+              <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="hidden" multiple />
+              <input type="file" ref={imageInputRef} onChange={handleFileUpload} accept="image/*" className="hidden" multiple />
+            </div>
 
           {/* Input: Better font size for mobile tap */}
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyPress}
             placeholder="Escribe..."
             className="flex-1 bg-transparent border-none focus:ring-0 text-white text-[13px] md:text-sm placeholder:text-slate-600 font-medium h-full min-w-0"
           />
 
           {/* Right Send Icon */}
-          <button className="ml-2 md:ml-4 p-1.5 md:p-2 text-[#00E676] hover:scale-110 active:scale-90 transition-all shrink-0">
+          <button 
+            onClick={handleSendMessage}
+            className="ml-2 md:ml-4 p-1.5 md:p-2 text-[#00E676] hover:scale-110 active:scale-90 transition-all shrink-0"
+          >
             <SendHorizontal size={20} md:size={22} strokeWidth={2.5} />
           </button>
+          </div>
         </div>
 
         {/* Footer Hint: Hidden on very small screens to save space */}

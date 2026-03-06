@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Search, Bell, Menu, X, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
-    { name: "Oportunidades", href: "#" },
-    { name: "Servicios", href: "#" },
-    { name: "Mensajes", href: "#" },
-    { name: "Comunidad", href: "#" },
+    { name: "Oportunidades", href: "/opportunities-feed" },
+    { name: "Servicios", href: "/client-dashboard" },
+    { name: "Mensajes", href: "/message-center" },
+    { name: "Comunidad", href: "/comunidad" },
   ];
 
   return (
@@ -51,7 +53,10 @@ const Navbar = () => {
                   {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
 
-                <div className="flex items-center gap-2.5 cursor-pointer">
+                <div 
+                  onClick={() => navigate("/")}
+                  className="flex items-center gap-2.5 cursor-pointer"
+                >
                   <div className="w-6 h-6 md:w-7 md:h-7 flex flex-wrap shrink-0">
                     <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-transparent"></div>
                     <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-black"></div>
@@ -65,13 +70,13 @@ const Navbar = () => {
 
                 <div className="hidden md:flex ml-4 lg:ml-8 space-x-5 lg:space-x-8">
                   {navLinks.map((link) => (
-                    <a
+                    <button
                       key={link.name}
-                      href={link.href}
+                      onClick={() => link.href !== "#" && navigate(link.href)}
                       className="text-gray-300 hover:text-white text-[14px] lg:text-sm font-semibold transition-all whitespace-nowrap"
                     >
                       {link.name}
-                    </a>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -119,13 +124,16 @@ const Navbar = () => {
         <div className="md:hidden bg-[#111827] border-t border-gray-800 animate-in slide-in-from-top duration-300">
           <div className="px-6 py-6 space-y-2">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                className="block px-4 py-3.5 text-base font-bold text-gray-300 hover:text-white hover:bg-[#1e293b] rounded-2xl transition-all"
+                onClick={() => {
+                  if (link.href !== "#") navigate(link.href);
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-4 py-3.5 text-base font-bold text-gray-300 hover:text-white hover:bg-[#1e293b] rounded-2xl transition-all"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
           </div>
         </div>

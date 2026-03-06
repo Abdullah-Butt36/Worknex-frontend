@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MoreVertical, Filter, ArrowUpDown, Building2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ProposalTable = () => {
+  const navigate = useNavigate();
   // 1. Active Tab State
   const [activeTab, setActiveTab] = useState("Todas");
   const tabs = ["Todas", "Enviada", "Vista", "Seleccionada", "No seleccionada"];
@@ -116,7 +118,8 @@ const ProposalTable = () => {
           {proposals.map((item) => (
             <div
               key={item.id}
-              className="grid grid-cols-12 px-4 md:px-6 py-5 items-center hover:bg-white/[0.02] transition-all group"
+              onClick={() => navigate('/proposal-view')}
+              className="grid grid-cols-12 px-4 md:px-6 py-5 items-center hover:bg-white/[0.02] cursor-pointer transition-all group"
             >
               {/* Title & Client (Responsive: columns shift here on mobile) */}
               <div className="col-span-8 md:col-span-5">

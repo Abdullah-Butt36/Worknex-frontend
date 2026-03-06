@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { HelpCircle, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const TermsAndConditions = () => {
   const [accepted, setAccepted] = useState(false);
+  const navigate = useNavigate();
 
   const sections = [
     {
@@ -46,7 +48,10 @@ const TermsAndConditions = () => {
     <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#1A202C]">
       <nav className="w-full h-20 border-b border-gray-100 bg-white sticky top-0 z-[100]">
         <div className="max-w-[1440px] mx-auto h-full px-10 md:px-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div 
+            onClick={() => navigate("/")}
+            className="flex items-center gap-3 cursor-pointer"
+          >
             <div className="w-6 h-6 md:w-7 md:h-7 flex flex-wrap">
               <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-white border-[0.1px] border-gray-100"></div>
               <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-black"></div>
@@ -150,6 +155,7 @@ const TermsAndConditions = () => {
           {/* Action Button */}
           <div className="flex justify-end">
             <button
+              onClick={() => navigate(-1)}
               disabled={!accepted}
               className={`w-full md:w-auto flex items-center justify-center gap-4 px-20 py-5 rounded-2xl font-[900] text-[17px] transition-all
                   ${

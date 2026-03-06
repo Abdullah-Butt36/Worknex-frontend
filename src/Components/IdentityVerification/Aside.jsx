@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ShieldCheck, ChevronDown, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Aside = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -42,7 +43,7 @@ const Aside = () => {
         </p>
 
         {/* Link with Arrow */}
-        <div className="flex items-center gap-2 cursor-pointer group w-fit">
+        <Link to="/termsandconditions" className="flex items-center gap-2 cursor-pointer group w-fit">
           <span className="text-blue-500 font-bold text-[14px] border-b border-transparent group-hover:border-blue-500 transition-all">
             Ver política de privacidad
           </span>
@@ -50,7 +51,7 @@ const Aside = () => {
             size={15}
             className="text-blue-500 group-hover:translate-x-1 transition-transform"
           />
-        </div>
+        </Link>
       </div>
 
       {/* --- FAQ CONTAINER (Responsive Card) --- */}

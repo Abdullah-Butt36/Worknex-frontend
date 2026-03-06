@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ProjectNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="w-full h-[80px] bg-white border-b border-[#F3F4F6] flex items-center justify-between px-6 md:px-12 lg:px-20 sticky top-0 z-[1000] font-sans antialiased">
-      <div className="flex items-center gap-2 shrink-0">
+      <div 
+        onClick={() => navigate("/")}
+        className="flex items-center gap-2 shrink-0 cursor-pointer"
+      >
         <div className="w-6 h-6 md:w-7 md:h-7 flex flex-wrap">
           <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-white"></div>
           <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-black"></div>

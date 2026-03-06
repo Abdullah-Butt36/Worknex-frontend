@@ -9,8 +9,10 @@ import {
   Copyright,
   ArrowDown,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LegalFeed = () => {
+  const navigate = useNavigate();
   const documents = [
     {
       id: 1,
@@ -122,7 +124,10 @@ const LegalFeed = () => {
               <span className="text-[22px] font-[700] text-[#0F172A]">
                 {doc.price}
               </span>
-              <button className="bg-[#EFF6FF] text-[#1D61E7] px-5 py-2.5 rounded-xl font-[800] text-[14px] hover:bg-blue-100 transition-colors">
+              <button
+                onClick={() => navigate("/login-step-1")}
+                className="bg-[#EFF6FF] text-[#1D61E7] px-5 py-2.5 rounded-xl font-[800] text-[14px] hover:bg-blue-100 transition-colors"
+              >
                 Ver detalles
               </button>
             </div>
@@ -134,7 +139,10 @@ const LegalFeed = () => {
         ))}
       </div>
 
-      <div className="flex items-center justify-center gap-4 mt-20 mb-16 group cursor-pointer">
+      <div 
+        onClick={() => navigate("/dashboard-home")}
+        className="flex items-center justify-center gap-4 mt-20 mb-16 group cursor-pointer"
+      >
         <span className="text-[18px] font-[700] text-[#475569] group-hover:text-[#1D61E7] transition-colors">
           Ver más documentos
         </span>

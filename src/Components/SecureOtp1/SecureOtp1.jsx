@@ -1,7 +1,9 @@
 import React from "react";
 import { CheckCircle2, Loader2, Circle, Lock, Briefcase } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SecureOtp1 = () => {
+  const navigate = useNavigate();
   return (
     <div className="fixed inset-0 bg-gray-900/60 flex items-center justify-center p-4 z-[100] font-sans">
       {/* --- Main Modal Container --- */}
@@ -29,7 +31,10 @@ const SecureOtp1 = () => {
         </p>
 
         <div className="w-full space-y-4 mb-10">
-          <div className="w-full p-4 bg-green-50/50 border border-green-100 rounded-full flex items-center justify-between">
+          <div 
+            onClick={() => navigate("/login-step-2")}
+            className="w-full p-4 bg-green-50/50 border border-green-100 rounded-full flex items-center justify-between cursor-pointer hover:bg-green-100 transition-colors"
+          >
             <div className="flex items-center gap-3">
               <CheckCircle2 size={20} className="text-green-500" />
               <span className="text-[14px] font-[700] text-gray-700">
@@ -39,7 +44,10 @@ const SecureOtp1 = () => {
           </div>
 
           {/* Step 2: In Progress */}
-          <div className="w-full p-4 bg-blue-50/50 border border-blue-100 rounded-full flex items-center justify-between">
+          <div 
+            onClick={() => navigate("/dashboard-home")}
+            className="w-full p-4 bg-blue-50/50 border border-blue-100 rounded-full flex items-center justify-between cursor-pointer hover:bg-blue-100 transition-colors"
+          >
             <div className="flex items-center gap-3">
               <div className="relative">
                 <Circle
@@ -56,7 +64,10 @@ const SecureOtp1 = () => {
             </span>
           </div>
 
-          <div className="w-full p-4 bg-gray-50/50 border border-gray-200 rounded-full flex items-center justify-between opacity-50">
+          <div 
+            onClick={() => navigate("/client-dashboard")}
+            className="w-full p-4 bg-gray-50/50 border border-gray-200 rounded-full flex items-center justify-between opacity-50 cursor-pointer hover:opacity-100 hover:bg-gray-100 transition-all"
+          >
             <div className="flex items-center gap-3">
               <Circle size={20} className="text-gray-300" />
               <span className="text-[14px] font-[700] text-gray-400">

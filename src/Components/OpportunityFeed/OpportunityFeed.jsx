@@ -1,7 +1,9 @@
 import React from 'react';
 import { DollarSign, Calendar, MapPin, Lock, Zap, Send } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const OpportunityFeed = () => {
+const OpportunityFeed = () => {    
+  const navigate = useNavigate();
   const opportunities = [
     {
       id: 1,
@@ -109,8 +111,16 @@ const OpportunityFeed = () => {
               </div>
               
               <div className="flex gap-4">
-                <button className="text-sm font-bold text-[#1e293b] hover:text-blue-600">Ver detalles</button>
-                <button className="px-7 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full flex items-center gap-2 ">
+                <button 
+                  onClick={() => navigate('/proposal-soft-gate')}
+                  className="text-sm font-bold text-[#1e293b] hover:text-blue-600"
+                >
+                  Ver detalles
+                </button>
+                <button 
+                  onClick={() => navigate('/submit-proposal')}
+                  className="px-7 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-full flex items-center gap-2 "
+                >
                   Postularme <Send className="w-4 h-4 rotate-45" />
                 </button>
               </div>
@@ -127,7 +137,10 @@ const OpportunityFeed = () => {
               <p className="text-sm text-gray-500 max-w-[260px] mb-6 font-medium">
                 Esta oportunidad es exclusiva para miembros de alto nivel.
               </p>
-              <button className="px-6 py-3 bg-[#0b111e] hover:bg-black text-white text-[13px] font-bold rounded-xl flex items-center gap-2 shadow-xl transition-transform active:scale-95">
+              <button 
+                onClick={() => navigate('/subscription')}
+                className="px-6 py-3 bg-[#0b111e] hover:bg-black text-white text-[13px] font-bold rounded-xl flex items-center gap-2 shadow-xl transition-transform active:scale-95"
+              >
                 <Zap className="w-4 h-4 text-yellow-400 fill-current" /> Mejorar Plan Ver detalles 
               </button>
             </div>

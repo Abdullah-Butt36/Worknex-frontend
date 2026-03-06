@@ -13,10 +13,13 @@ import {
   Code2,
   BrainCircuit,
   Palette,
-  PenTool,
+
+ 
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const DashboardContent = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full bg-[#F8FAFC]">
       <div className="max-w-[1300px] mx-auto py-8 pt-24 lg:pt-10 px-6 md:px-10">
@@ -77,6 +80,7 @@ const DashboardContent = () => {
             value="Plan Profesional"
             subValue="Renueva en 18 días"
             link="Ver Plan"
+            route="/subscription"
             bgText="verified"
           />
         </div>
@@ -89,7 +93,10 @@ const DashboardContent = () => {
               <h2 className="text-[21px] font-[700] text-[#1A202C]">
                 Oportunidades para ti
               </h2>
-              <button className="text-[#1D61E7] font-bold text-[14px] hover:underline">
+              <button 
+                onClick={() => navigate("/opportunities-feed")}
+                className="text-[#1D61E7] font-bold text-[14px] hover:underline"
+              >
                 Ver todas
               </button>
             </div>
@@ -168,7 +175,10 @@ const DashboardContent = () => {
                 </li>
               </ul>
 
-              <button className="w-full bg-[#1D61E7] py-3.5 rounded-full font-[700] text-[14px] hover:bg-blue-600 active:scale-95 transition-all relative z-10">
+              <button 
+                onClick={() => navigate("/subscription")}
+                className="w-full bg-[#1D61E7] py-3.5 rounded-full font-[700] text-[14px] hover:bg-blue-600 active:scale-95 transition-all relative z-10"
+              >
                 Actualizar a Premium
               </button>
 
@@ -211,8 +221,10 @@ const StatCard = ({
   tagIcon,
   progress,
   link,
+  route,
   bgText,
 }) => {
+  const navigate = useNavigate();
   const isPlan = title === "Plan Activo";
   return (
     <div className="bg-white p-5 rounded-[24px] border border-gray-100 shadow-sm relative overflow-hidden h-[155px] flex flex-col justify-between group">
@@ -264,7 +276,12 @@ const StatCard = ({
           </div>
         )}
         {link && (
-          <button className="text-[#1D61E7] text-[13px] font-[800] flex items-center gap-1 mt-2 hover:gap-2 transition-all">
+          <button 
+            onClick={() => {
+              if (route) navigate(route);
+            }}
+            className="text-[#1D61E7] text-[13px] font-[800] flex items-center gap-1 mt-2 hover:gap-2 transition-all"
+          >
             {link} <ArrowRight size={14} strokeWidth={3} />
           </button>
         )}

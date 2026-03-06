@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   Briefcase,
@@ -8,6 +9,7 @@ import {
 } from "lucide-react";
 
 const Section = () => {
+  const navigate = useNavigate();
   const containerStyle = "max-w-[1440px] mx-auto px-6 md:px-10";
 
   return (
@@ -122,7 +124,10 @@ const Section = () => {
             WORKNEX.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-white text-[#1D61E7] px-8 py-4 rounded-full font-bold hover:scale-105 transition-all">
+            <button 
+              onClick={() => navigate("/role-selection")}
+              className="bg-white text-[#1D61E7] px-8 py-4 rounded-full font-bold hover:scale-105 transition-all"
+            >
               Empezar Gratis
             </button>
             <button className="bg-transparent border border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all">

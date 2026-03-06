@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar2 from "./Navbar2";
 import { MapPin, ArrowLeft, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const MainLayout2 = () => {
+  const [currency, setCurrency] = useState("CLP");
+  const [isManualBudget, setIsManualBudget] = useState(false);
+  const [manualBudget, setManualBudget] = useState("");
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col bg-[#F9FAFB]">
       <Navbar2 />
@@ -59,10 +64,16 @@ const MainLayout2 = () => {
                   Presupuesto estimado
                 </label>
                 <div className="flex bg-gray-100/80 p-1 rounded-xl w-fit">
-                  <button className="bg-white text-[#1D61E7] px-5 py-1.5 rounded-lg text-[11px] md:text-[12px] font-[900] shadow-sm">
+                  <button 
+                    onClick={() => setCurrency("CLP")}
+                    className={`px-5 py-1.5 rounded-lg text-[11px] md:text-[12px] font-[900] transition-colors ${currency === "CLP" ? "bg-white text-[#1D61E7] shadow-sm" : "text-gray-400 hover:text-gray-600"}`}
+                  >
                     CLP
                   </button>
-                  <button className="text-gray-400 px-5 py-1.5 rounded-lg text-[11px] md:text-[12px] font-[900] hover:text-gray-600 transition-colors">
+                  <button 
+                    onClick={() => setCurrency("UF")}
+                    className={`px-5 py-1.5 rounded-lg text-[11px] md:text-[12px] font-[900] transition-colors ${currency === "UF" ? "bg-white text-[#1D61E7] shadow-sm" : "text-gray-400 hover:text-gray-600"}`}
+                  >
                     UF
                   </button>
                 </div>
@@ -84,21 +95,50 @@ const MainLayout2 = () => {
             </div>
 
             {/* Checkbox - Improved UX */}
-            <div className="flex items-center gap-3 group cursor-pointer w-fit">
-              <div className="w-6 h-6 border-2 border-gray-200 rounded-lg group-hover:border-[#1D61E7] transition-colors flex items-center justify-center"></div>
-              <span className="text-[13px] md:text-[14px] font-[600] text-gray-500 group-hover:text-[#111827] transition-colors">
-                No tengo un presupuesto definido
-              </span>
+            <div className="flex flex-col gap-3">
+              <div 
+                onClick={() => setIsManualBudget(!isManualBudget)}
+                className="flex items-center gap-3 group cursor-pointer w-fit"
+              >
+                <div className={`w-6 h-6 border-2 rounded-lg transition-colors flex items-center justify-center ${isManualBudget ? 'bg-[#1D61E7] border-[#1D61E7]' : 'border-gray-200 group-hover:border-[#1D61E7]'}`}>
+                  {isManualBudget && (
+                    <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+                <span className="text-[13px] md:text-[14px] font-[600] text-gray-500 group-hover:text-[#111827] transition-colors">
+                  Ingresar presupuesto manualmente / No definido
+                </span>
+              </div>
+              
+              {isManualBudget && (
+                <div className="mt-2 animate-in fade-in slide-in-from-top-2">
+                  <input
+                    type="text"
+                    value={manualBudget}
+                    onChange={(e) => setManualBudget(e.target.value)}
+                    placeholder="Escribe tu presupuesto o 'A convenir'..."
+                    className="w-full p-4 md:p-5 bg-white border border-gray-200 rounded-[16px] text-[14px] md:text-[15px] font-medium focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all text-[#111827]"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         {/* Navigation Footer - Responsive Buttons */}
         <div className="w-full max-w-[850px] flex flex-row items-center justify-between mt-8 md:mt-12 px-1 gap-4">
-          <button className="flex items-center justify-center gap-2 bg-white text-[#111827] px-6 md:px-10 py-3.5 md:py-4 rounded-full font-[700] text-[14px] md:text-[15px] border border-gray-100 shadow-sm hover:bg-gray-50 hover:shadow-md transition-all flex-1 sm:flex-none active:scale-95">
+          <button 
+            onClick={() => navigate(-1)}
+            className="flex items-center justify-center gap-2 bg-white text-[#111827] px-6 md:px-10 py-3.5 md:py-4 rounded-full font-[700] text-[14px] md:text-[15px] border border-gray-100 shadow-sm hover:bg-gray-50 hover:shadow-md transition-all flex-1 sm:flex-none active:scale-95"
+          >
             <ArrowLeft size={18} strokeWidth={2.5} /> Atrás
           </button>
-          <button className="flex items-center justify-center gap-2 bg-[#1D61E7] text-white px-8 md:px-12 py-3.5 md:py-4 rounded-full font-[700] text-[14px] md:text-[15px]  hover:bg-blue-700 hover:-translate-y-0.5 transition-all flex-1 sm:flex-none active:scale-95">
+          <button 
+            onClick={() => navigate("/project-publication")}
+            className="flex items-center justify-center gap-2 bg-[#1D61E7] text-white px-8 md:px-12 py-3.5 md:py-4 rounded-full font-[700] text-[14px] md:text-[15px]  hover:bg-blue-700 hover:-translate-y-0.5 transition-all flex-1 sm:flex-none active:scale-95"
+          >
             Siguiente <ArrowRight size={18} strokeWidth={2.5} />
           </button>
         </div>

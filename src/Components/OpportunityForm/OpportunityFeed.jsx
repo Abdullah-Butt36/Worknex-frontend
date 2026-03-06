@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown, ArrowDown, Bookmark, Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // --- ORIGINAL CUSTOM SVG ICONS ---
 
@@ -71,6 +72,7 @@ const LocationPin = () => (
 );
 
 const OpportunityFeed = () => {
+  const navigate = useNavigate();
   const opportunities = [
     {
       id: 1,
@@ -237,11 +239,18 @@ const OpportunityFeed = () => {
                 </div>
 
                 <button
+                  onClick={() => {
+                    if (job.isLocked) {
+                      navigate('/subscription');
+                    } else {
+                      navigate('/proposal-soft-gate');
+                    }
+                  }}
                   className={`mt-6 flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-[700] text-[16px] w-full lg:w-full transition-all active:scale-95
                     ${
                       job.isLocked
                         ? "bg-[#F8FAFC] text-[#64748B] border border-gray-100"
-                        : "bg-[#1D61E7] text-white hover:bg-blue-700 shadow-lg shadow-blue-100"
+                        : "bg-[#1D61E7] text-white hover:bg-blue-700 "
                     }`}
                 >
                   {job.isLocked && <LockIcon />} Ver Detalles

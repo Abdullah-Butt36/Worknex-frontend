@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const FilterSidebar = () => {
+  const navigate = useNavigate();
   const [openSections, setOpenSections] = useState({
     ubicacion: true,
     categoria: true,
@@ -171,7 +173,10 @@ const FilterSidebar = () => {
               Accede a oportunidades prioritarias, filtros avanzados y mayor
               visibilidad.
             </p>
-            <button className="w-full bg-white text-[#1D61E7] py-3.5 rounded-full font-[900] text-[15px] hover:bg-gray-50 transition-all shadow-xl active:scale-95">
+            <button 
+              onClick={() => navigate('/subscription')}
+              className="w-full bg-white text-[#1D61E7] py-3.5 rounded-full font-[900] text-[15px] hover:bg-gray-50 transition-all shadow-xl active:scale-95"
+            >
               Ver planes
             </button>
           </div>

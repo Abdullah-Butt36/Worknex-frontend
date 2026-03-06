@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { User, Building2, X, Check, UserCog } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const IdentifyRole = () => {
   const [selectedType, setSelectedType] = useState("individual");
+  const navigate = useNavigate();
 
   return (
     <div className="fixed inset-0 bg-gray-900/60 flex items-center justify-center p-6 z-[100] font-sans">
       <div className="bg-white w-full max-w-[640px] rounded-[32px] shadow-2xl relative max-h-[90vh] overflow-y-auto scrollbar-hide">
         <div className="px-6 md:px-12 pt-8 md:pt-10 pb-8 md:pb-10 flex flex-col items-center relative">
           <div className="w-full flex justify-end mb-2">
-            <button className="text-gray-400 hover:text-black transition-colors p-2 -mr-4">
+            <button 
+              onClick={() => navigate("/role-selection")}
+              className="text-gray-400 hover:text-black transition-colors p-2 -mr-4"
+            >
               <X size={24} />
             </button>
           </div>
@@ -162,10 +167,16 @@ const IdentifyRole = () => {
 
           {/* Action Buttons */}
           <div className="w-full flex flex-col items-center gap-4">
-            <button className="w-full py-4 bg-[#1D61E7] text-white rounded-[18px] font-[700] text-[16px] md:text-[18px] hover:bg-blue-700 transition-all ">
+            <button 
+              onClick={() => navigate("/login-step-1")}
+              className="w-full py-4 bg-[#1D61E7] text-white rounded-[18px] font-[700] text-[16px] md:text-[18px] hover:bg-blue-700 transition-all "
+            >
               Continuar
             </button>
-            <button className="text-gray-500 font-extrabold text-[15px] md:text-[17px] hover:text-black transition-colors py-2 mb-4">
+            <button 
+              onClick={() => navigate("/role-selection")}
+              className="text-gray-500 font-extrabold text-[15px] md:text-[17px] hover:text-black transition-colors py-2 mb-4"
+            >
               Cancelar
             </button>
           </div>
@@ -175,7 +186,10 @@ const IdentifyRole = () => {
         <div className="w-full bg-[#F9FAFB] py-6 md:py-8 border-t border-gray-100 text-center shrink-0">
           <p className="text-gray-500 text-[14px] md:text-[16px] font-medium">
             ¿Ya tienes cuenta?{" "}
-            <span className="text-[#1D61E7] font-[900] cursor-pointer hover:underline ml-1">
+            <span 
+              onClick={() => navigate("/login-step-1")}
+              className="text-[#1D61E7] font-[900] cursor-pointer hover:underline ml-1"
+            >
               Inicia sesión
             </span>
           </p>

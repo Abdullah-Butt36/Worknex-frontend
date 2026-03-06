@@ -1,5 +1,6 @@
 import React from "react";
 import { Search, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LegalHero = () => {
   return (
@@ -7,13 +8,13 @@ const LegalHero = () => {
       <div className="w-full px-6 md:px-10 lg:px-20">
         {/* --- BREADCRUMBS --- */}
         <nav className="flex items-center gap-2 text-[15px] font-[600] text-[#94A3B8] mb-5">
-          <a href="#" className="hover:text-[#1D61E7] transition-colors">
+          <Link to="/" className="hover:text-[#1D61E7] transition-colors">
             Inicio
-          </a>
+          </Link>
           <span className="text-gray-300">/</span>
-          <span className="hover:text-[#1D61E7] cursor-pointer transition-colors">
+          <Link to="/legal-documents" className="hover:text-[#1D61E7] transition-colors">
             Recursos Legales
-          </span>
+          </Link>
           <span className="text-gray-300">/</span>
           <span className="text-[#64748B]">Tienda de Documentos</span>
         </nav>

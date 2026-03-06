@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Search, Bell, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 w-full shadow-sm">
@@ -33,7 +35,7 @@ const Navbar = () => {
               {/* --- REGULAR VIEW (Logo + Left Side) --- */}
               <div className="flex items-center gap-4 flex-1">
                 {/* Logo Section */}
-                <div className="flex items-center gap-2 md:gap-2.5 shrink-0">
+                <Link to="/" className="flex items-center gap-2 md:gap-2.5 shrink-0">
                   <div className="relative w-8 h-8 md:w-9 md:h-9 bg-[#1D61E7] rounded-full flex items-center justify-center shadow-lg shadow-blue-100">
                     <div
                       className="w-[14px] h-[14px] md:w-[18px] md:h-[18px] bg-white"
@@ -43,7 +45,7 @@ const Navbar = () => {
                   <span className="font-[700] text-lg md:text-[22px] tracking-tight text-black uppercase">
                     WORKNEX
                   </span>
-                </div>
+                </Link>
 
                 {/* Desktop Search (Hidden on Mobile) */}
                 <div className="hidden md:block relative max-w-md w-full ml-4">
@@ -79,13 +81,16 @@ const Navbar = () => {
 
                 {/* Bell & Profile */}
                 <div className="flex items-center gap-2 sm:gap-4">
-                  <button className="relative p-1.5 text-gray-400">
+                  <button 
+                    onClick={() => navigate('/message-center')}
+                    className="relative p-1.5 text-gray-400 hover:text-blue-600 transition-colors"
+                  >
                     <Bell className="h-5 w-5" />
                     <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
                   </button>
-                  <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-200 border border-gray-100 overflow-hidden cursor-pointer">
+                  <Link to="/personal-socument" className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-200 border border-gray-100 overflow-hidden cursor-pointer hover:border-blue-400 transition-colors">
                     <img src="https://ui-avatars.com/api/?name=User&background=cbd5e1&color=fff" alt="User" />
-                  </div>
+                  </Link>
                 </div>
               </div>
             </>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PlanFooter = () => {
   return (
@@ -30,9 +31,9 @@ const PlanFooter = () => {
         <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-slate-800/50">
           <p className="text-slate-500 text-[13px]">© 2026 WORKNEX Inc. All rights reserved.</p>
           <div className="flex gap-8 text-slate-500 text-[13px] font-medium">
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Contact</a>
+            <Link to="/termsandconditions" className="hover:text-white transition-colors">Terms</Link>
+            <Link to="/termsandconditions" className="hover:text-white transition-colors">Privacy</Link>
+            <Link to="/message-center" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
       </div>

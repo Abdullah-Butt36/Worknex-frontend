@@ -1,10 +1,15 @@
 import React from "react";
 import { ArrowLeft, DollarSign, Clock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeaderSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full max-w-[1100px] mx-auto pt-6 md:pt-10 px-4 md:px-6 font-sans">
-      <button className="flex items-center gap-2 md:gap-3 text-gray-400 hover:text-white transition-colors mb-6 group">
+      <button 
+        onClick={() => navigate('/proposal-soft-gate')}
+        className="flex items-center gap-2 md:gap-3 text-gray-400 hover:text-white transition-colors mb-6 group"
+      >
         <ArrowLeft
           size={16}
           className="group-hover:-translate-x-1 transition-transform"

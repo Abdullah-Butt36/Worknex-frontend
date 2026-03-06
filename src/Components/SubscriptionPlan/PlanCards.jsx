@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const PlanCards = () => {
   const [isYearly, setIsYearly] = useState(false);
+  const navigate = useNavigate();
   // Default selected card 'Professional' (index 1)
   const [selectedPlan, setSelectedPlan] = useState(1); 
 
@@ -101,12 +103,20 @@ const PlanCards = () => {
               </ul>
             </div>
 
-            <button className={`w-full mt-8 py-4 rounded-2xl font-black text-[15px] uppercase tracking-wider transition-all ${
+            <button 
+              onClick={() => {
+                if (selectedPlan === plan.id) {
+                  navigate("/login-step-1");
+                } else {
+                  setSelectedPlan(plan.id);
+                }
+              }}
+              className={`w-full mt-8 py-4 rounded-2xl font-black text-[15px] uppercase tracking-wider transition-all ${
               selectedPlan === plan.id 
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' 
+              ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 active:scale-95' 
               : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800 hover:text-white'
             }`}>
-              {selectedPlan === plan.id ? 'Selected' : 'Subscribe'}
+              {selectedPlan === plan.id ? 'Get Started' : 'Select'}
             </button>
           </div>
         ))}

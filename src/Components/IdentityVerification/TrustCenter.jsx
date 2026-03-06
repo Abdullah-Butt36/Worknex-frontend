@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -9,6 +9,14 @@ import {
 } from "lucide-react";
 
 const TrustCenter = () => {
+  const [isUploaded, setIsUploaded] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleUpload = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setIsUploaded(true);
+    }
+  };
   return (
     <div className="flex-1 p-5 md:p-12 overflow-y-auto bg-[#020617]">
       {/* Header Section */}
@@ -117,9 +125,28 @@ const TrustCenter = () => {
                   </p>
                 </div>
               </div>
-              <button className="w-full lg:w-auto bg-blue-600 hover:bg-blue-500 text-white text-[13px] font-bold px-8 py-3 rounded-xl transition-all shadow-lg shadow-blue-600/10 active:scale-95">
-                Subir documento
-              </button>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-3 w-full lg:w-auto mt-4 lg:mt-0">
+                {isUploaded ? (
+                  <span className="bg-emerald-500/10 text-emerald-500 text-[10px] md:text-[11px] font-bold px-4 py-1.5 rounded-full border border-emerald-500/20 self-start sm:self-auto text-center lg:text-left">
+                    Verificado
+                  </span>
+                ) : (
+                  <button 
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full lg:w-auto bg-blue-600 hover:bg-blue-500 text-white text-[13px] font-bold px-8 py-3 rounded-xl transition-all shadow-lg shadow-blue-600/10 active:scale-95"
+                  >
+                    Subir documento
+                  </button>
+                )}
+                {/* Hidden File Input */}
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  onChange={handleUpload} 
+                  className="hidden" 
+                  accept=".pdf,.doc,.docx,.jpg,.png"
+                />
+              </div>
             </div>
           </div>
           <p className="text-slate-400 text-xs md:text-sm pt-4 leading-relaxed">

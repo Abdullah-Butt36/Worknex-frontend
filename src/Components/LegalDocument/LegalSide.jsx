@@ -7,8 +7,10 @@ import {
   FileText,
   Layout,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LegalSide = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full bg-white border border-gray-100 rounded-[32px] overflow-hidden shadow-2xl shadow-gray-200/50">
       {/* --- HEADER: Title & Version --- */}
@@ -26,7 +28,10 @@ const LegalSide = () => {
             </p>
           </div>
         </div>
-        <button className="text-gray-400 hover:text-red-500 transition-colors">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-gray-400 hover:text-red-500 transition-colors"
+        >
           <X size={24} strokeWidth={2.5} />
         </button>
       </div>
@@ -85,7 +90,10 @@ const LegalSide = () => {
         </div>
 
         {/* --- BUY BUTTON --- */}
-        <button className="w-full bg-[#1D61E7] text-white py-5 rounded-[20px] font-[700] text-[18px] flex items-center justify-center gap-3 hover:bg-blue-700 shadow-xl shadow-blue-100 active:scale-95 transition-all mb-8">
+        <button
+          onClick={() => navigate("/login-step-1")}
+          className="w-full bg-[#1D61E7] text-white py-5 rounded-[20px] font-[700] text-[18px] flex items-center justify-center gap-3 hover:bg-blue-700 shadow-xl shadow-blue-100 active:scale-95 transition-all mb-8"
+        >
           Comprar ahora <ShoppingCart size={20} strokeWidth={3} />
         </button>
 

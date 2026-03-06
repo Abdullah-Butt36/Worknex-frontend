@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import DocumentLibrary from "./DocumentLibrary";
-import FooterSection from "./FooterSection";
 
-const DashboardLayout = () => {
+const PersonalSocumentLayout = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="h-screen bg-[#0b111e] text-white flex flex-col font-sans overflow-hidden">
       <div className="z-50 flex-none">
@@ -18,12 +20,18 @@ const DashboardLayout = () => {
 
         <main className="flex-1 overflow-y-auto bg-[#0b111e] custom-scrollbar">
           <div className="max-w-[1400px] mx-auto p-6 md:p-12">
-            <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-8 font-medium uppercase tracking-[0.2em]">
-              <span className="hover:text-white cursor-pointer transition-colors">
+            <div className="flex items-center gap-2 text-[15px] text-slate-500 mb-8 font-medium">
+              <span 
+                onClick={() => navigate("/dashboard-home")}
+                className="hover:text-white cursor-pointer transition-colors"
+              >
                 Inicio
               </span>
               <span className="text-slate-700">/</span>
-              <span className="hover:text-white cursor-pointer transition-colors">
+              <span 
+                onClick={() => navigate("/identity-verification")}
+                className="hover:text-white cursor-pointer transition-colors"
+              >
                 Herramientas
               </span>
               <span className="text-slate-700">/</span>
@@ -31,7 +39,6 @@ const DashboardLayout = () => {
             </div>
 
             <DocumentLibrary />
-            <FooterSection />
           </div>
         </main>
       </div>
@@ -51,4 +58,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default PersonalSocumentLayout;

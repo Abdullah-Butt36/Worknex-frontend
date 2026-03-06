@@ -49,9 +49,9 @@ const CommunicationPopup = ({ isOpen, onClose }) => {
         <div className="space-y-4 text-center">
           <button
             onClick={onClose}
-            className="w-full bg-[#00E676] hover:bg-[#00C864] text-[#06110D] py-3.5 md:py-4 rounded-2xl font-black text-[12px] md:text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95"
+            className="w-full bg-[#00E676] hover:bg-[#00C864] text-[#06110D] py-3.5 md:py-4 rounded-2xl font-black text-[14px] md:text-sm flex items-center justify-center gap-3 transition-all shadow-lg active:scale-95"
           >
-            Entendido, continuar <CheckCircle2 size={18} strokeWidth={3} />
+            Entendido, continuar en Worknex <CheckCircle2 size={18} strokeWidth={3} />
           </button>
 
           <button

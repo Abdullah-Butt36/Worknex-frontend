@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 const MainLayout = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#F9FAFB] flex flex-col font-sans antialiased">
       <Header />
@@ -57,7 +59,12 @@ const MainLayout = () => {
                 <div className="absolute w-[98%] h-full bg-[#E5E7EB] rounded-full opacity-60"></div>
 
                 <select className="w-full h-full bg-transparent relative z-10 text-center appearance-none cursor-pointer outline-none font-[700] text-gray-500 text-[14px]">
-                  <option value=""></option>
+                  <option value="" disabled selected>Selecciona una categoría</option>
+                  <option value="software">Desarrollo de Software</option>
+                  <option value="design">Diseño Gráfico</option>
+                  <option value="marketing">Marketing Digital</option>
+                  <option value="consulting">Consultoría Empresarial</option>
+                  <option value="writing">Redacción y Traducción</option>
                 </select>
 
                 <div className="absolute right-6 z-20 pointer-events-none opacity-40">
@@ -128,10 +135,16 @@ const MainLayout = () => {
 
         {/* --- Sticky-style Footer Buttons: Exact Placement --- */}
         <div className="w-full max-w-[780px] flex items-center justify-between mt-12 mb-6 px-1">
-          <button className="text-gray-600 font-[700] text-[15px] tracking-wide hover:opacity-80 transition-all">
+          <button 
+            onClick={() => navigate(-1)}
+            className="text-gray-600 font-[700] text-[15px] tracking-wide hover:opacity-80 transition-all"
+          >
             Cancelar
           </button>
-          <button className="bg-[#1D61E7] text-white px-10 py-3.5 rounded-2xl font-[700] text-[15px] flex items-center gap-2.5">
+          <button 
+            onClick={() => navigate("/wizard-2")}
+            className="bg-[#1D61E7] text-white px-10 py-3.5 rounded-2xl font-[700] text-[15px] flex items-center gap-2.5"
+          >
             Siguiente <span className="text-[18px]">→</span>
           </button>
         </div>

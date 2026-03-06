@@ -1,5 +1,6 @@
 import React from "react";
 import { Linkedin, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -32,18 +33,18 @@ const Footer = () => {
                 Plataforma
               </h4>
               <ul className="space-y-3">
-                {["Soluciones", "Seguros", "Finanzas", "Empresas"].map(
-                  (item) => (
-                    <li key={item}>
-                      <a
-                        href="#"
-                        className="text-gray-500 text-[14px] hover:text-[#1D61E7] transition-colors"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  ),
-                )}
+                <li className="text-gray-500 text-[14px]">
+                  Soluciones
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Seguros
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Finanzas
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Empresas
+                </li>
               </ul>
             </div>
 
@@ -53,16 +54,18 @@ const Footer = () => {
                 Recursos
               </h4>
               <ul className="space-y-3">
-                {["Blog", "Guías", "Ayuda", "Partners"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-gray-500 text-[14px] hover:text-[#1D61E7] transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                <li className="text-gray-500 text-[14px]">
+                  Blog
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Guías
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Ayuda
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Partners
+                </li>
               </ul>
             </div>
 
@@ -72,16 +75,20 @@ const Footer = () => {
                 Legal
               </h4>
               <ul className="space-y-3">
-                {["Privacidad", "Términos", "Cookies"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-gray-500 text-[14px] hover:text-[#1D61E7] transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                <li className="text-gray-500 text-[14px]">
+                  Privacidad
+                </li>
+                <li>
+                  <Link
+                    to="/termsandconditions"
+                    className="text-gray-500 text-[14px] hover:text-[#1D61E7] transition-colors"
+                  >
+                    Términos
+                  </Link>
+                </li>
+                <li className="text-gray-500 text-[14px]">
+                  Cookies
+                </li>
               </ul>
             </div>
           </div>

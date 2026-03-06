@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { Layers, Bell, Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
-    { name: "Dashboard", href: "#" },
-    { name: "Solicitudes", href: "#", active: true },
+    { name: "Dashboard", href: "/client-dashboard" },
+    { name: "Solicitudes", href: "/project-summary", active: true },
     { name: "Proveedores", href: "#" },
-    { name: "Mensajes", href: "#" },
+    { name: "Mensajes", href: "/message-center" },
   ];
 
   return (
     <nav className="w-full bg-white border-b border-gray-100 sticky top-0 z-[100]">
       <div className="w-full px-4 md:px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-5 cursor-pointer">
+        <div 
+          onClick={() => navigate("/")}
+          className="flex items-center gap-5 cursor-pointer"
+        >
           <Layers className="text-black w-7 h-7 " />
           <span className="font-[700] text-[19px] md:text-[22px]  text-black uppercase">
             WORKNEX
@@ -24,17 +29,19 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-10 text-[14px] font-semibold  text-gray-500">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.name}
-              href={link.href}
+              onClick={() => {
+                if (link.href !== "#") navigate(link.href);
+              }}
               className={`${
                 link.active
                   ? "text-black  pb-1"
-                  : "hover:text-blue-600 transition-all"
+                  : "hover:text-blue-600 transition-all text-gray-500"
               }`}
             >
               {link.name}
-            </a>
+            </button>
           ))}
         </div>
 
@@ -68,16 +75,18 @@ const Navbar = () => {
         <div className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-xl md:hidden animate-in fade-in slide-in-from-top-2">
           <div className="flex flex-col p-6 gap-5">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-lg font-semibold ${
+                onClick={() => {
+                  setIsOpen(false);
+                  if (link.href !== "#") navigate(link.href);
+                }}
+                className={`text-lg font-semibold text-left ${
                   link.active ? "text-black" : "text-gray-500"
                 }`}
               >
                 {link.name}
-              </a>
+              </button>
             ))}
           </div>
         </div>

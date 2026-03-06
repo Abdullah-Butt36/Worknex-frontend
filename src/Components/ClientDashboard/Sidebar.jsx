@@ -12,30 +12,35 @@ import {
   X,
   Infinity,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("Inicio");
 
   const menuItems = [
-    { name: "Inicio", icon: Home },
-    { name: "Solicitudes", icon: FileText },
-    { name: "Propuestas", icon: LayoutGrid, badge: 3 },
-    { name: "Servicios", icon: Handshake },
-    { name: "Mensajes", icon: MessageSquare },
-    { name: "Documentos", icon: Folder },
+    { name: "Inicio", icon: Home, route: "/client-dashboard" },
+    { name: "Solicitudes", icon: FileText, route: "/project-summary" },
+    { name: "Propuestas", icon: LayoutGrid, badge: 3, route: "/proposal-history" },
+    { name: "Servicios", icon: Handshake, route: "/opportunities-feed" },
+    { name: "Mensajes", icon: MessageSquare, route: "/message-center" },
+    { name: "Documentos", icon: Folder, route: "/personal-socument" },
   ];
 
   const bottomItems = [
-    { name: "Perfil", icon: User },
-    { name: "Configuración", icon: Settings },
+    { name: "Perfil", icon: User, route: "/personal-socument" },
+    { name: "Configuración", icon: Settings, route: "/subscription" },
   ];
 
-  const handleNavClick = (name) => {
+  const handleNavClick = (name, route) => {
     setActiveTab(name);
     if (window.innerWidth < 1024) {
-      setIsMobileOpen(true);
+      setIsMobileOpen(false);
+    }
+    if (route) {
+      navigate(route);
     }
   };
 
@@ -43,7 +48,7 @@ const Sidebar = () => {
     const isActive = activeTab === item.name;
     return (
       <div
-        onClick={() => handleNavClick(item.name)}
+        onClick={() => handleNavClick(item.name, item.route)}
         className={`
           flex items-center justify-between px-4 py-3 cursor-pointer rounded-2xl transition-all duration-200
           ${isActive ? "bg-[#EFF4FF] text-[#1D61E7]" : "text-[#64748B] hover:bg-gray-50 hover:text-black"}
@@ -88,7 +93,10 @@ const Sidebar = () => {
       >
         {/* Header Section */}
         <div className="px-6 py-8 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div 
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <div className="bg-[#1D61E7] w-11 h-11 rounded-full flex items-center justify-center shadow-sm">
               <Infinity className="text-white w-6 h-6" strokeWidth={2.5} />
             </div>

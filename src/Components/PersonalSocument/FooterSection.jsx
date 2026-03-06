@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Upload, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const FooterSection = ({ onUpload }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -16,8 +19,24 @@ const FooterSection = ({ onUpload }) => {
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    if (onUpload) {
+    if (onUpload && e.dataTransfer.files.length) {
       onUpload(e);
+    }
+  };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e) => {
+    if (onUpload && e.target.files.length) {
+      // Wrap in a fake drop event structure so onUpload can read .dataTransfer.files
+      const wrappedEvent = {
+        dataTransfer: { files: e.target.files },
+      };
+      onUpload(wrappedEvent);
+      // Reset input so same file can be uploaded again
+      e.target.value = "";
     }
   };
 
@@ -28,9 +47,10 @@ const FooterSection = ({ onUpload }) => {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
+        onClick={handleClick}
         className={`
           lg:col-span-2 border-2 border-dashed rounded-[32px] p-12 
-          flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer
+          flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer select-none
           ${
             isDragging
               ? "border-blue-500 bg-blue-500/10 scale-[1.01]"
@@ -53,10 +73,23 @@ const FooterSection = ({ onUpload }) => {
             : "Arrastra y suelta archivos aquí"}
         </h3>
 
-        <p className="text-sm text-slate-500 text-center max-w-sm font-medium leading-relaxed">
+        <p className="text-sm text-slate-500 text-center max-w-sm font-medium leading-relaxed mb-4">
           Archivos privados. No son visibles para otros a menos que los adjuntes
           a una solicitud.
         </p>
+
+        <span className="text-xs text-slate-600 border border-slate-700 px-4 py-1.5 rounded-full group-hover:border-blue-500/50 group-hover:text-blue-400 transition-all">
+          o haz clic para seleccionar archivos
+        </span>
+
+        {/* Hidden file input */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          multiple
+          className="hidden"
+          onChange={handleFileChange}
+        />
       </div>
 
       {/* 2. PREMIUM PLAN CARD */}
@@ -79,7 +112,10 @@ const FooterSection = ({ onUpload }) => {
         </div>
 
         <div className="mt-8 relative z-10">
-          <button className="w-full bg-[#1e293b] hover:bg-slate-700 text-white py-4 rounded-2xl text-[13px] font-bold transition-all active:scale-95 border border-slate-700 shadow-lg flex items-center justify-center gap-2">
+          <button 
+            onClick={() => navigate('/subscription')}
+            className="w-full bg-[#1e293b] hover:bg-slate-700 text-white py-4 rounded-2xl text-[13px] font-bold transition-all active:scale-95 border border-slate-700 shadow-lg flex items-center justify-center gap-2"
+          >
             Gestionar Plan
           </button>
         </div>

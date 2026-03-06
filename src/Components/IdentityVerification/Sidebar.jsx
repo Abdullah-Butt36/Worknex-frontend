@@ -6,13 +6,15 @@ import {
   Settings,
   Headset,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const menuItems = [
-    { icon: <LayoutGrid size={20} />, label: "Panel", active: false },
-    { icon: <Briefcase size={20} />, label: "Proyectos", active: false },
-    { icon: <ShieldCheck size={20} />, label: "Identidad", active: true },
-    { icon: <Settings size={20} />, label: "Ajustes", active: false },
+    { icon: <LayoutGrid size={20} />, label: "Panel", active: false, to: "/dashboard-home" },
+    { icon: <Briefcase size={20} />, label: "Proyectos", active: false, to: "/project-summary" },
+    { icon: <ShieldCheck size={20} />, label: "Identidad", active: true, to: "/identity-verification" },
+    { icon: <Settings size={20} />, label: "Ajustes", active: false, to: "/profile-settings" }, // Placeholder for settings until created
   ];
 
   return (
@@ -46,6 +48,7 @@ const Sidebar = () => {
               {menuItems.map((item, i) => (
                 <button
                   key={i}
+                  onClick={() => navigate(item.to)}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-[14px] ${
                     item.active
                       ? "bg-blue-600/10 text-blue-500 shadow-[inset_0_0_0_1px_rgba(37,99,235,0.2)]"
@@ -85,6 +88,7 @@ const Sidebar = () => {
         {menuItems.map((item, i) => (
           <button
             key={i}
+            onClick={() => navigate(item.to)}
             className={`flex flex-col items-center gap-1 p-2 rounded-lg ${
               item.active ? "text-blue-500" : "text-slate-500"
             }`}

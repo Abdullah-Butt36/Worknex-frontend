@@ -1,14 +1,29 @@
-import React from 'react';
-import { FileText, Calendar, Clock, Flag, Link as LinkIcon, Edit3, Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { FileText, Calendar, Clock, Flag, Link as LinkIcon, Edit3, Trash2, CheckCircle2, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const MainProposalContent = () => {
+  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+
   const milestones = [
     { desc: 'Fase 1: Investigación y Moodboard', date: '31 Oct, 2023', amount: '$500.00' },
     { desc: 'Fase 2: Desarrollo de Conceptos y Logotipo', date: '14 Nov, 2023', amount: '$800.00' },
     { desc: 'Fase 3: Manual de Marca y Activos Finales', date: '21 Nov, 2023', amount: '$1,200.00' },
   ];
 
+  const handleWithdrawProposal = () => {
+    if(window.confirm("Are you sure you want to withdraw this proposal?")) {
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+        navigate('/proposal-history');
+      }, 2500);
+    }
+  };
+
   return (
+    <>
     <div className="space-y-10 text-white">
       {/* 1. Header Section */}
       <section>
@@ -97,15 +112,43 @@ const MainProposalContent = () => {
 
       {/* 5. Bottom Actions */}
       <section className="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-800">
-        <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-95">
+        <button 
+          onClick={() => navigate('/proposal-history')}
+          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-95"
+        >
           Editar Propuesta
         </button>
-        <button className="flex items-center gap-2 text-gray-500 hover:text-red-400 font-semibold transition-colors">
+        <button 
+          onClick={handleWithdrawProposal}
+          className="flex items-center gap-2 text-gray-500 hover:text-red-400 font-semibold transition-colors"
+        >
           <Trash2 className="w-5 h-5" />
           Retirar Propuesta
         </button>
       </section>
     </div>
+
+    {/* Custom Toast Notification Overlay */}
+    {showToast && (
+      <div className="fixed top-24 right-4 md:right-8 lg:right-10 z-[2000] animate-in slide-in-from-right fade-in duration-300">
+        <div className="bg-[#111827] border border-red-500/30 shadow-2xl shadow-red-500/10 rounded-xl p-4 pr-12 flex items-start gap-3 relative">
+          <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0">
+            <CheckCircle2 size={18} className="text-red-500" />
+          </div>
+          <div className="flex flex-col mt-0.5">
+            <h4 className="text-white font-[700] text-[14px]">Propuesta Retirada</h4>
+            <p className="text-gray-400 text-[12px] mt-0.5">La propuesta ha sido retirada exitosamente.</p>
+          </div>
+          <button 
+            onClick={() => setShowToast(false)}
+            className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
+          >
+            <X size={16} />
+          </button>
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 

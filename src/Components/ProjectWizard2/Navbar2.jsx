@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar2 = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="w-full h-[72px] bg-white border-b border-[#F3F4F6] flex items-center justify-between px-6 md:px-12 lg:px-20 sticky top-0 z-[1000] font-sans antialiased">
-      <div className="flex items-center gap-2">
+      <div 
+        onClick={() => navigate("/")}
+        className="flex items-center gap-2 cursor-pointer"
+      >
         <div className="w-6 h-6 md:w-7 md:h-7 flex flex-wrap">
           <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-white"></div>
           <div className="w-3 md:w-3.5 h-3 md:h-3.5 bg-black"></div>
@@ -22,7 +27,6 @@ const Navbar2 = () => {
         {["Dashboard", "Proyectos", "Proveedores", "Mensajes"].map((link) => (
           <a
             key={link}
-            href="#"
             className="text-[14.5px] font-[700] text-[#4B5563] hover:text-black transition-colors"
           >
             {link}
@@ -31,7 +35,10 @@ const Navbar2 = () => {
       </div>
 
       <div className="flex items-center gap-3 md:gap-5">
-        <button className="hidden sm:block bg-[#1D61E7] text-white px-7 py-2.5 rounded-full font-[700] text-[14px] hover:bg-blue-700 transition-all shadow-md">
+        <button 
+          onClick={() => navigate("/project-publication")}
+          className="hidden sm:block bg-[#1D61E7] text-white px-7 py-2.5 rounded-full font-[700] text-[14px] hover:bg-blue-700 transition-all shadow-md"
+        >
           Publicar proyecto
         </button>
 
@@ -58,7 +65,13 @@ const Navbar2 = () => {
               {link}
             </a>
           ))}
-          <button className="w-full bg-[#1D61E7] text-white py-3.5 rounded-full font-[800]">
+          <button 
+            onClick={() => {
+              setIsOpen(false);
+              navigate("/project-publication");
+            }}
+            className="w-full bg-[#1D61E7] text-white py-3.5 rounded-full font-[800]"
+          >
             Publicar proyecto
           </button>
         </div>

@@ -1,10 +1,16 @@
 import React from "react";
 import { Bell, Briefcase } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="w-full h-[72px] bg-white border-b border-gray-100 flex items-center justify-between px-4 md:px-12 sticky top-0 z-[1000] font-sans">
-      <div className="flex items-center gap-2.5 cursor-pointer">
+      <div 
+        onClick={() => navigate("/")}
+        className="flex items-center gap-2.5 cursor-pointer"
+      >
         <div className="w-[32px] h-[32px] bg-[#1D61E7] rounded-lg flex items-center justify-center shadow-sm">
           <Briefcase size={18} className="text-white fill-white" />
         </div>

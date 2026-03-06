@@ -9,8 +9,10 @@ import {
   ExternalLink,
   Star,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   return (
     <div className="space-y-6">
       {/* 1. Pricing Card */}
@@ -24,7 +26,10 @@ const Sidebar = () => {
         </div>
 
         <div className="space-y-3">
-          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition">
+          <button 
+            onClick={() => navigate("/submit-proposal")}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition"
+          >
             Enviar propuesta
             <span className="text-xl">→</span>
           </button>

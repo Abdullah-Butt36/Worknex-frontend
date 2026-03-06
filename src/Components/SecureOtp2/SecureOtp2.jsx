@@ -8,12 +8,17 @@ import {
   Lock,
   X,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SecureOtp2 = () => {
+  const navigate = useNavigate();
   return (
     <div className="fixed inset-0 bg-gray-900/60 flex items-center justify-center p-4 z-[100] font-sans ">
       <div className="bg-white w-full md:max-w-[540px] rounded-[28px] shadow-2xl relative overflow-hidden max-h-[90vh] flex flex-col">
-        <button className="absolute top-5 right-6 text-gray-400 hover:text-black p-1 z-10 transition-colors">
+        <button 
+          onClick={() => navigate("/login-step-1")}
+          className="absolute top-5 right-6 text-gray-400 hover:text-black p-1 z-10 transition-colors"
+        >
           <X size={22} />
         </button>
 
@@ -67,7 +72,10 @@ const SecureOtp2 = () => {
           </div>
 
           {/* Action Button */}
-          <button className="w-full py-4 bg-[#1D61E7] text-white rounded-full font-[700] text-[16px] flex items-center justify-center gap-2 hover:bg-blue-700 transition-all ">
+          <button 
+            onClick={() => navigate("/identity-verification")}
+            className="w-full py-4 bg-[#1D61E7] text-white rounded-full font-[700] text-[16px] flex items-center justify-center gap-2 hover:bg-blue-700 transition-all "
+          >
             Comenzar Verificación <ArrowRight size={19} />
           </button>
 

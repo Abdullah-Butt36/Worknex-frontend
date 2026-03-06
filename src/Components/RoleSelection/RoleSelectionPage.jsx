@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Store, Handshake, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const RoleSelectionPage = () => {
   const [selectedRole, setSelectedRole] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-[#F9FAFB] font-sans flex flex-col">
       {/* --- Simple Navbar --- */}
       <nav className="w-full bg-white px-6 md:px-16 h-[100px] flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div 
+          onClick={() => navigate("/")}
+          className="flex items-center gap-3 cursor-pointer"
+        >
           <div className="w-10 h-10 bg-[#1D61E7] rounded-xl flex items-center justify-center text-white">
             <Store size={22} fill="white" />
           </div>
@@ -18,7 +23,10 @@ const RoleSelectionPage = () => {
             </span>
           </div>
         </div>
-        <button className="flex items-center gap-2 text-gray-600 font-bold text-sm hover:text-black">
+        <button 
+          onClick={() => navigate("/login-step-1")}
+          className="flex items-center gap-2 text-gray-600 font-bold text-sm hover:text-black cursor-pointer"
+        >
           Iniciar Sesión <ArrowRight size={18} />
         </button>
       </nav>
@@ -73,6 +81,7 @@ const RoleSelectionPage = () => {
         <div className="w-full max-w-md flex flex-col items-center gap-6">
           <button
             disabled={!selectedRole}
+            onClick={() => navigate("/identify-role")}
             className={`w-full py-4 rounded-xl font-bold text-lg transition-all shadow-lg
               ${
                 selectedRole
@@ -85,7 +94,10 @@ const RoleSelectionPage = () => {
 
           <p className="text-gray-500 text-[15px]">
             ¿Ya tienes una cuenta?{" "}
-            <span className="text-[#1D61E7] font-bold cursor-pointer hover:underline">
+            <span 
+              onClick={() => navigate("/login-step-1")}
+              className="text-[#1D61E7] font-bold cursor-pointer hover:underline"
+            >
               Inicia sesión
             </span>
           </p>
